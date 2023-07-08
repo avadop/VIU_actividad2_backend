@@ -9,6 +9,7 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    protected $table = 'clientes';
     protected $primaryKey = 'dni';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -28,24 +29,29 @@ class Cliente extends Model
         return $this->hasMany(Mascota::class, 'dni', 'dni');
     }
 
-    public static function createCliente($datos)
+    public function crearCliente()
     {
-        return self::create($datos);
+        return self::save();
     }
 
-    public function updateCliente($datos)
+    public function actualizarCliente()
     {
-        return $this->update($datos);
+        return self::save();
     }
 
     public function deleteCliente()
     {
-        return $this->delete();
+        return self::delete();
     }
 
     public static function getAllClientes()
     {
         return self::all();
+    }
+
+    public static function getClienteById($id)
+    {
+        return self::findOrFail($id);
     }
 
 }

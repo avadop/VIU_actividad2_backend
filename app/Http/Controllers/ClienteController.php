@@ -21,12 +21,10 @@ class ClienteController extends Controller
         $resultResponse->setData($clientes);
         $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
         $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
-        
-        // return view('clientes.index', compact('clientes'));
+    
         // return response()->json($resultResponse);
 
-        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);
-    
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
     }
 
@@ -48,24 +46,36 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $resultResponse =  new ResultResponse();
-        
-        // Validar los datos del formulario de creación
-        $validatedData = $request->validate([
-            'dni' => 'required|string|unique:cliente',
-            'correo_electronico' => 'required|email|unique:cliente',
-            'direccion' => 'required|string',
-            'nombre' => 'required|string',
-            'apellidos' => 'required|string',
-            'contrasenya' => 'required|string',
-            'telefono' => 'required|integer',
-        ]);
+        $this->validaCliente($request);
 
-        // Crear un nuevo cliente con los datos validados
-        $cliente = Cliente::createCliente($validatedData);
+        $resultResponse =  new ResultResponse();        
 
-        // Redireccionar a la vista del cliente recién creado
-        return redirect()->route('clientes.show', $cliente->dni);
+        try {
+            $nuevoCliente = new Cliente([
+                'dni' => $request->get('dni'),
+                'correo_electronico' => $request->get('correo_electronico'),
+                'direccion' => $request->get('direccion'),
+                'nombre' => $request->get('nombre'),
+                'apellidos' => $request->get('apellidos'),
+                'contrasenya' => $request->get('contrasenya'),
+                'telefono' => $request->get('telefono')
+            ]);
+
+            // Cliente::createCliente($nuevoCliente);
+            $nuevoCliente->crearCliente();
+
+            $resultResponse->setData($nuevoCliente);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
    /**
@@ -76,7 +86,24 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        return view('clientes.show', compact('cliente'));
+        $resultResponse =  new ResultResponse();
+
+        try {
+            $cliente = Cliente::getClienteById($id);
+
+            $resultResponse->setData($cliente);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+
+        } catch(\Exception $e) {
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }       
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -99,21 +126,100 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // Validar los datos del formulario de edición
-        $validatedData = $request->validate([
-            'correo_electronico' => 'required|email|unique:cliente,correo_electronico,'.$cliente->dni.',dni',
-            'direccion' => 'required|string',
-            'nombre' => 'required|string',
-            'apellidos' => 'required|string',
-            'contrasenya' => 'required|string',
-            'telefono' => 'required|integer',
-        ]);
+        $this->validaCliente($request);
 
-        // Actualizar los datos del cliente con los datos validados
-        $cliente->updateCliente($validatedData);
+        $resultResponse =  new ResultResponse();       
 
-        // Redireccionar a la vista del cliente actualizado
-        return redirect()->route('clientes.show', $cliente->dni);
+        try {
+
+            $cliente = Cliente::getClienteById($id);
+            if( $request->get('direccion')) {
+                $cliente->direccion = $request->get('direccion');
+            }
+
+            if($request->get('nombre')){
+                $cliente->nombre = $request->get('nombre');
+            }
+
+            if($request->get('apellidos')){
+                $cliente->apellidos = $request->get('apellidos');
+            }
+
+            if($request->get('telefono')){
+                $cliente->telefono = $request->get('telefono');
+            }
+
+            if( $request->get('correo_electronico')) {
+                $cliente->correo_electronico = $request->get('correo_electronico');
+            }
+
+            $cliente->actualizarCliente();
+
+            $resultResponse->setData($cliente);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    
+    /**
+     * Put the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function put(Request $request, string $id)
+    {
+        $this->validaCliente($request);
+        
+        $resultResponse =  new ResultResponse();
+
+        try {
+            $cliente = Cliente::getClienteById($id);
+            if( $request->get('direccion')) {
+                $cliente->direccion = $request->get('direccion');
+            }
+
+            if($request->get('nombre')){
+                $cliente->nombre = $request->get('nombre');
+            }
+
+            if($request->get('apellidos')){
+                $cliente->apellidos = $request->get('apellidos');
+            }
+
+            if($request->get('telefono')){
+                $cliente->telefono = $request->get('telefono');
+            }
+
+            if( $request->get('correo_electronico')) {
+                $cliente->correo_electronico = $request->get('correo_electronico');
+            }
+
+
+            $cliente->actualizarCliente();
+
+            $resultResponse->setData($cliente);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
      /**
@@ -124,10 +230,50 @@ class ClienteController extends Controller
      */
     public function destroy(string $id)
     {
-        // Eliminar el cliente
-        $cliente->deleteCliente();
+        $resultResponse =  new ResultResponse();
 
-        // Redireccionar a la lista de clientes
-        return redirect()->route('clientes.index');
+        try{
+            $cliente = Cliente::getClienteById($id);
+            $cliente->deleteCliente();
+            
+            $resultResponse->setData($cliente);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
+
+    private function validaCliente($request)
+    {
+        $data = $request->all();
+        $rules = [];
+
+        $validationRules = [
+            'dni' => 'required',
+            'correo_electronico' => 'required|email',
+            'direccion' => 'required',
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'contrasenya' => 'required',
+            'telefono' => 'required'
+        ];
+
+        foreach ($validationRules as $field => $validationRule) {
+            if (isset($data[$field])) {
+                $rules[$field] = $validationRule;
+            }
+        }
+
+        $validatedData = $request->validate($rules);
+
+        return $validatedData;
+    }
+
 }

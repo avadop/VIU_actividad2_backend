@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mascota;
+use App\Models\ResultResponse;
 
 class MascotaController extends Controller
 {
@@ -14,8 +15,16 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        $mascotas = Mascota::all();
-        return view('mascotas.index', compact('mascotas'));
+        $mascotas = Mascota::getAllMascotas();
+       
+        $resultResponse =  new ResultResponse();
+        $resultResponse->setData($mascotas);
+        $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+        $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);
+    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -36,24 +45,38 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar los datos del formulario de creación
-        $validatedData = $request->validate([
-            'num_chip' => 'required|integer|unique:mascota',
-            'nombre_mascota' => 'required|string',
-            'edad' => 'required|integer',
-            'sexo' => 'required|string',
-            'especie' => 'required|string',
-            'vacunas' => 'required|string',
-            'informes_de_mascota' => 'required|json',
-            'historial_clinico' => 'nullable|string',
-            'dni' => 'required|string|exists:cliente',
-        ]);
+        $this->validaMascota($request);
 
-        // Crear una nueva mascota con los datos validados
-        $mascota = Mascota::create($validatedData);
+        $resultResponse =  new ResultResponse();    
 
-        // Redireccionar a la vista de la mascota recién creada
-        return redirect()->route('mascotas.show', $mascota->num_chip);
+        try {
+            $nuevaMascota = new Mascota([
+                'num_chip' => $request->get('num_chip'),
+                'nombre_mascota' => $request->get('nombre_mascota'),
+                'edad' => $request->get('edad'),
+                'sexo' => $request->get('sexo'),
+                'especie' => $request->get('especie'),
+                'vacunas' => $request->get('vacunas'),
+                'informes_de_mascota' => $request->get('informes_de_mascota'),
+                'historial_clinico' => $request->get('historial_clinico'),
+                'dni' => $request->get('dni')
+            ]);
+
+            // Cliente::createCliente($nuevoCliente);
+            $nuevaMascota->crearMascota();
+
+            $resultResponse->setData($nuevaMascota);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
    /**
@@ -64,7 +87,23 @@ class MascotaController extends Controller
      */
     public function show(string $id)
     {
-        return view('mascotas.show', compact('mascota'));
+        $resultResponse =  new ResultResponse();
+
+        try {
+            $mascota = Mascota::getMascotaById($id);
+
+            $resultResponse->setData($mascota);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+
+        } catch(\Exception $e) {
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }       
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
      /**
@@ -87,23 +126,123 @@ class MascotaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-         // Validar los datos del formulario de edición
-         $validatedData = $request->validate([
-            'nombre_mascota' => 'required|string',
-            'edad' => 'required|integer',
-            'sexo' => 'required|string',
-            'especie' => 'required|string',
-            'vacunas' => 'required|string',
-            'informes_de_mascota' => 'required|json',
-            'historial_clinico' => 'nullable|string',
-            'dni' => 'required|string|exists:cliente',
-        ]);
+        $this->validaMascota($request);
 
-        // Actualizar los datos de la mascota con los datos validados
-        $mascota->update($validatedData);
+        $resultResponse =  new ResultResponse();       
 
-        // Redireccionar a la vista de la mascota actualizada
-        return redirect()->route('mascotas.show', $mascota->num_chip);
+        try {
+
+            $mascota = Mascota::getMascotaById($id);
+            if( $request->get('nombre_mascota')) {
+                $mascota->nombre_mascota = $request->get('nombre_mascota');
+            }
+
+            if($request->get('edad')){
+                $mascota->edad = $request->get('edad');
+            }
+
+            if($request->get('sexo')){
+                $mascota->sexo = $request->get('sexo');
+            }
+
+            if($request->get('especie')){
+                $mascota->especie = $request->get('especie');
+            }
+
+            if( $request->get('vacunas')) {
+                $mascota->vacunas = $request->get('vacunas');
+            }
+
+            if( $request->get('informes_de_mascota')) {
+                $mascota->informes_de_mascota = $request->get('informes_de_mascota');
+            }
+
+            if( $request->get('historial_clinico')) {
+                $mascota->historial_clinico = $request->get('historial_clinico');
+            }
+
+            if( $request->get('dni')) {
+                $mascota->dni = $request->get('dni');
+            }
+
+            $mascota->actualizarMascota();
+
+            $resultResponse->setData($mascota);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+      /**
+     * Put the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Mascota  $mascota
+     * @return \Illuminate\Http\Response
+     */
+    public function put(Request $request, string $id)
+    {
+        $this->validaMascota($request);
+        
+        $resultResponse =  new ResultResponse();
+
+        try {
+            $mascota = Mascota::getMascotaById($id);
+
+            if( $request->get('nombre_mascota')) {
+                $mascota->nombre_mascota = $request->get('nombre_mascota');
+            }
+
+            if($request->get('edad')){
+                $mascota->edad = $request->get('edad');
+            }
+
+            if($request->get('sexo')){
+                $mascota->sexo = $request->get('sexo');
+            }
+
+            if($request->get('especie')){
+                $mascota->especie = $request->get('especie');
+            }
+
+            if( $request->get('vacunas')) {
+                $mascota->vacunas = $request->get('vacunas');
+            }
+
+            if( $request->get('informes_de_mascota')) {
+                $mascota->informes_de_mascota = $request->get('informes_de_mascota');
+            }
+
+            if( $request->get('historial_clinico')) {
+                $mascota->historial_clinico = $request->get('historial_clinico');
+            }
+
+            if( $request->get('dni')) {
+                $mascota->dni = $request->get('dni');
+            }
+
+            $mascota->actualizarMascota();
+
+            $resultResponse->setData($mascota);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -114,10 +253,52 @@ class MascotaController extends Controller
      */
     public function destroy(string $id)
     {
-        // Eliminar la mascota
-        $mascota->delete();
+       $resultResponse =  new ResultResponse();
 
-        // Redireccionar a la lista de mascotas
-        return redirect()->route('mascotas.index');
+        try{
+            $mascota = Mascota::getMascotaById($id);
+            $mascota->deleteMascota();
+            
+            $resultResponse->setData($mascota);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
     }
+
+    private function validaMascota($request)
+    {
+        $data = $request->all();
+        $rules = [];
+
+        $validationRules = [
+            'num_chip' => 'required',
+            'nombre_mascota' => 'required',
+            'edad' => 'required',
+            'sexo' => 'required',
+            'especie' => 'required',
+            'vacunas' => 'required',
+            'informes_de_mascota' => 'required',
+            'historial_clinico' => 'required',
+            'dni' => 'required'
+        ];
+
+        foreach ($validationRules as $field => $validationRule) {
+            if (isset($data[$field])) {
+                $rules[$field] = $validationRule;
+            }
+        }
+
+        $validatedData = $request->validate($rules);
+
+        return $validatedData;
+    }
+
 }
