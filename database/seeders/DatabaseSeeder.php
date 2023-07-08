@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            ClienteSeeder::class,
-            MascotaSeeder::class,
+            ClientesTableSeeder::class,
+            MascotasTableSeeder::class,
         ]);
     }
 }

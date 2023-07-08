@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mascota', function (Blueprint $table) {
+        Schema::create('mascotas', function (Blueprint $table) {
             $table->integer('num_chip')->unsigned();
             $table->string('nombre_mascota');
             $table->integer('edad');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('historial_clinico')->nullable();
             $table->string('dni', 9);
             $table->primary('num_chip');
-            $table->foreign('dni')->references('dni')->on('cliente')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('dni')->references('dni')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mascota');
+        Schema::dropIfExists('mascotas');
     }
 };
