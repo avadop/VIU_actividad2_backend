@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClientesTableSeeder::class,
             MascotasTableSeeder::class,
+            ClinicasTableSeeder::class,
+            CitasTableSeeder::class,
+            RecordatoriosTableSeeder::class
         ]);
     }
 }
