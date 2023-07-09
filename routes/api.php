@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CitaController;
+use App\Http\Controllers\MascotaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
@@ -38,5 +40,18 @@ Route::controller(MascotaController::class)->prefix('mascotas')->group(function 
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
 }); 
+
+// RUTAS CITA
+Route::controller(CitaController::class)->prefix('citas')->group(function () {
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::post('/new', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+    Route::get('/mascota/{num_chip}', 'getCitasMascota');
+    Route::get('/clinica/{id_clinica}', 'getCitasClinica');
+    Route::get('/{hora}/{fecha}', 'getCitaHoraYFecha');
+}); 
+
 
 
