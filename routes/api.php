@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\MascotaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -53,5 +54,14 @@ Route::controller(CitaController::class)->prefix('citas')->group(function () {
     Route::get('/{hora}/{fecha}', 'getCitaHoraYFecha');
 }); 
 
+
+// RUTAS CLINICA
+Route::controller(ClinicaController::class)->prefix('clinicas')->group(function () {
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::post('/new', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+}); 
 
 
