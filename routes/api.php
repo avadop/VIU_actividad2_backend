@@ -3,6 +3,7 @@
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\MascotaController;
+use App\Http\Controllers\RecordatorioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
@@ -62,6 +63,17 @@ Route::controller(ClinicaController::class)->prefix('clinicas')->group(function 
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
+}); 
+
+// RUTAS RECORDATORIOS
+Route::controller(RecordatorioController::class)->prefix('recordatorios')->group(function () {
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::post('/new', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+    Route::get('/mascota/{num_chip}', 'getRecordatoriosMascota');
+    Route::get('/clinica/{id_clinica}', 'getRecordatoriosClinica');
 }); 
 
 
