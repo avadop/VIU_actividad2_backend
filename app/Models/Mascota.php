@@ -26,27 +26,6 @@ class Mascota extends Model
         'dni',
     ];
 
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class, 'dni', 'dni');
-    }
-
-    public function crearMascota()
-    {
-        return self::save();
-    }
-
-    public function actualizarMascota()
-    {
-        return self::save();
-    }
-
-
-    public function deleteMascota()
-    {
-        return self::delete();
-    }
-
     public static function getAllMascotas()
     {
         return self::all();
@@ -55,5 +34,25 @@ class Mascota extends Model
     public static function getMascotaById($id)
     {
         return self::findOrFail($id);
+    }
+
+    public function createMascota()
+    {
+        return self::save();
+    }
+
+    public function updateMascota()
+    {
+        return self::save();
+    }
+
+    public function deleteMascota()
+    {
+        return self::delete();
+    }
+
+    public function cliente()
+    {
+        return self::belongsTo(Cliente::class, 'dni', 'dni');
     }
 }

@@ -25,22 +25,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // API CLIENTES
 Route::controller(ClienteController::class)->prefix('clientes')->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store');
-    Route::post('/{id}', 'update');
-    Route::put('/{id}', 'put');
-    Route::get('/{id}', 'show');
-    Route::delete('/{id}', 'destroy');
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::get('/{id}/mascotas', 'getMascotas');
+    Route::post('/', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
 });
 
 // API MASCOTAS
 Route::controller(MascotaController::class)->prefix('mascotas')->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store');
-    Route::post('/{id}', 'update');
-    Route::put('/{id}', 'put');
-    Route::get('/{id}', 'show');
-    Route::delete('/{id}', 'destroy');
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::get('/{id}/cliente', 'getCliente');
+    Route::post('/', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
 }); 
 
 // RUTAS CITA

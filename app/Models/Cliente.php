@@ -24,26 +24,6 @@ class Cliente extends Model
         'telefono',
     ];
 
-    public function mascotas()
-    {
-        return $this->hasMany(Mascota::class, 'dni', 'dni');
-    }
-
-    public function crearCliente()
-    {
-        return self::save();
-    }
-
-    public function actualizarCliente()
-    {
-        return self::save();
-    }
-
-    public function deleteCliente()
-    {
-        return self::delete();
-    }
-
     public static function getAllClientes()
     {
         return self::all();
@@ -54,4 +34,23 @@ class Cliente extends Model
         return self::findOrFail($id);
     }
 
+    public function createCliente()
+    {
+        return self::save();
+    }
+
+    public function updateCliente()
+    {
+        return self::save();
+    }
+
+    public function deleteCliente()
+    {
+        return self::delete();
+    }  
+
+    public function mascotas()
+    {
+        return self::hasMany(Mascota::class, 'dni', 'dni');
+    }
 }

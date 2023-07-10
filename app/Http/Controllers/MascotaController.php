@@ -13,7 +13,7 @@ class MascotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAll()
     {
         $mascotas = Mascota::getAllMascotas();
        
@@ -27,65 +27,13 @@ class MascotaController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('mascotas.create');
-    }
-
      /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validaMascota($request);
-
-        $resultResponse =  new ResultResponse();    
-
-        try {
-            $nuevaMascota = new Mascota([
-                'num_chip' => $request->get('num_chip'),
-                'nombre_mascota' => $request->get('nombre_mascota'),
-                'edad' => $request->get('edad'),
-                'sexo' => $request->get('sexo'),
-                'especie' => $request->get('especie'),
-                'vacunas' => $request->get('vacunas'),
-                'informes_de_mascota' => $request->get('informes_de_mascota'),
-                'historial_clinico' => $request->get('historial_clinico'),
-                'dni' => $request->get('dni')
-            ]);
-
-            // Cliente::createCliente($nuevoCliente);
-            $nuevaMascota->crearMascota();
-
-            $resultResponse->setData($nuevaMascota);
-            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
-            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
-
-        } catch(\Exception $e){
-            $resultResponse->setData($e);
-            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
-            $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
-        }
-
-        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
-        return response($json)->header('Content-Type', 'application/json');
-    }
-
-   /**
      * Display the specified resource.
      *
      * @param  \App\Models\Mascota  $mascota
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function getById($id)
     {
         $resultResponse =  new ResultResponse();
 
@@ -107,70 +55,22 @@ class MascotaController extends Controller
     }
 
      /**
-     * Show the form for editing the specified resource.
+     * Display a listing of the resource.
      *
-     * @param  \App\Models\Mascota  $mascota
+     * @param  \Illuminate\Http\Request  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function getCliente($id)
     {
-        return view('mascotas.edit', compact('mascota'));
-    }
+        $resultResponse =  new ResultResponse();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mascota  $mascota
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, string $id)
-    {
-        $this->validaMascota($request);
-
-        $resultResponse =  new ResultResponse();       
-
-        try {
-
+        try{
             $mascota = Mascota::getMascotaById($id);
-            if( $request->get('nombre_mascota')) {
-                $mascota->nombre_mascota = $request->get('nombre_mascota');
-            }
+            $mascotas = $mascota->cliente;
 
-            if($request->get('edad')){
-                $mascota->edad = $request->get('edad');
-            }
-
-            if($request->get('sexo')){
-                $mascota->sexo = $request->get('sexo');
-            }
-
-            if($request->get('especie')){
-                $mascota->especie = $request->get('especie');
-            }
-
-            if( $request->get('vacunas')) {
-                $mascota->vacunas = $request->get('vacunas');
-            }
-
-            if( $request->get('informes_de_mascota')) {
-                $mascota->informes_de_mascota = $request->get('informes_de_mascota');
-            }
-
-            if( $request->get('historial_clinico')) {
-                $mascota->historial_clinico = $request->get('historial_clinico');
-            }
-
-            if( $request->get('dni')) {
-                $mascota->dni = $request->get('dni');
-            }
-
-            $mascota->actualizarMascota();
-
-            $resultResponse->setData($mascota);
+            $resultResponse->setData($mascotas);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
-
         } catch(\Exception $e){
             $resultResponse->setData($e);
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
@@ -181,52 +81,97 @@ class MascotaController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
-      /**
-     * Put the specified resource in storage.
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        $requestContent = json_decode($request->getContent(), true);
+        $this->validaMascota($request, $requestContent);
+
+        $resultResponse =  new ResultResponse();    
+
+        try {
+            $nuevaMascota = new Mascota([
+                'num_chip' => $requestContent['num_chip'],
+                'nombre_mascota' => $requestContent['nombre_mascota'],
+                'edad' => $requestContent['edad'],
+                'sexo' => $requestContent['sexo'],
+                'especie' => $requestContent['especie'],
+                'vacunas' => $requestContent['vacunas'],
+                'informes_de_mascota' => $requestContent['informes_de_mascota'],
+                'historial_clinico' => $requestContent['historial_clinico'],
+                'dni' => $requestContent['dni']
+            ]);
+
+            $nuevaMascota->crearMascota();
+
+            $resultResponse->setData($nuevaMascota);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+  
+
+    /**
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Mascota  $mascota
      * @return \Illuminate\Http\Response
      */
-    public function put(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
-        $this->validaMascota($request);
-        
-        $resultResponse =  new ResultResponse();
+        $requestContent = json_decode($request->getContent(), true);
+        $this->validaMascota($request, $requestContent);
+
+        $resultResponse =  new ResultResponse();       
 
         try {
+
             $mascota = Mascota::getMascotaById($id);
-
-            if( $request->get('nombre_mascota')) {
-                $mascota->nombre_mascota = $request->get('nombre_mascota');
+            if( $requestContent['nombre_mascota']) {
+                $mascota->nombre_mascota = $requestContent['nombre_mascota'];
             }
 
-            if($request->get('edad')){
-                $mascota->edad = $request->get('edad');
+            if($requestContent['edad']){
+                $mascota->edad = $requestContent['edad'];
             }
 
-            if($request->get('sexo')){
-                $mascota->sexo = $request->get('sexo');
+            if($requestContent['sexo']){
+                $mascota->sexo = $requestContent['sexo'];
             }
 
-            if($request->get('especie')){
-                $mascota->especie = $request->get('especie');
+            if($requestContent['especie']){
+                $mascota->especie = $requestContent['especie'];
             }
 
-            if( $request->get('vacunas')) {
-                $mascota->vacunas = $request->get('vacunas');
+            if( $requestContent['vacunas']) {
+                $mascota->vacunas = $requestContent['vacunas'];
             }
 
-            if( $request->get('informes_de_mascota')) {
-                $mascota->informes_de_mascota = $request->get('informes_de_mascota');
+            if( $requestContent['informes_de_mascota']) {
+                $mascota->informes_de_mascota = $requestContent['informes_de_mascota'];
             }
 
-            if( $request->get('historial_clinico')) {
-                $mascota->historial_clinico = $request->get('historial_clinico');
+            if( $requestContent['historial_clinico']) {
+                $mascota->historial_clinico = $requestContent['historial_clinico'];
             }
 
-            if( $request->get('dni')) {
-                $mascota->dni = $request->get('dni');
+            if( $requestContent['dni']) {
+                $mascota->dni = $requestContent['dni'];
             }
 
             $mascota->actualizarMascota();
@@ -251,7 +196,7 @@ class MascotaController extends Controller
      * @param  \App\Models\Mascota  $mascota
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
        $resultResponse =  new ResultResponse();
 
@@ -273,7 +218,7 @@ class MascotaController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
-    private function validaMascota($request)
+    private function validaMascota($request, $content)
     {
         $data = $request->all();
         $rules = [];
@@ -291,7 +236,7 @@ class MascotaController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($data[$field])) {
+            if (isset($content[$field])) {
                 $rules[$field] = $validationRule;
             }
         }
