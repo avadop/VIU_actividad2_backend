@@ -4,6 +4,7 @@ use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\RecordatorioController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
@@ -74,6 +75,17 @@ Route::controller(RecordatorioController::class)->prefix('recordatorios')->group
     Route::delete('/{id}', 'delete');
     Route::get('/mascota/{num_chip}', 'getRecordatoriosMascota');
     Route::get('/clinica/{id_clinica}', 'getRecordatoriosClinica');
-}); 
+});
+
+//RUTAS PRODUCTOS
+Route::controller(ProductoController::class)->prefix('productos')->group(function () {
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::post('/new', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+    Route::get('/nombre_producto/{nombre_}', 'getProductosNombre');
+   
+});
 
 
