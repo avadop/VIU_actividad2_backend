@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->integer('id_producto')->unsigned();
+            $table->increments('id_producto');
             $table->string('nombre_producto');
             $table->string('marca');
-            $table->binary('imagen');
+            $table->string('imagen');
             $table->string('descripcion');
             $table->string('ficha_tecnica');
             $table->float('precio');
             $table->integer('cantidad_disponible');
-            $table->string('nombre_mascota');
-            $table->enum('tipo_producto',['comida', 'accesorios', 'medicamento', 'vacunas', 'peluqueria']);
-            $table->primary('id_producto');
+            $table->enum('tipo_producto', ['comida', 'accesorio', 'medicamento', 'vacunas', 'peluqueria']);
             $table->timestamps();
         });
     }
