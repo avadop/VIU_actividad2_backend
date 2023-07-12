@@ -56,6 +56,6 @@ class Cliente extends Model
 
     public function checkClientPassword($dni, $contrasenya)
     {
-        return self::where('dni', $dni)->where('contrasenya',$contrasenya) -> get();
+        return self::where('dni',$dni)->where('contrasenya',$contrasenya)->firstOrFail();
     }
 }

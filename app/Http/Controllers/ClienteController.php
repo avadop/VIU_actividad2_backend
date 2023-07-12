@@ -203,16 +203,24 @@ class ClienteController extends Controller
 
         try{
             $cliente = Cliente::getClienteById($dni);
-            $cliente->checkClientPassword($dni, $password);
-            
-            $resultResponse->setData($cliente['dni']);
-            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
-            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+        
+            try{
+                $cliente->checkClientPassword($dni, $password);
+
+                $resultResponse->setData($cliente['dni']);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e);
+                $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+                $resultResponse->setMessage('La contraseña introducida es incorrecta');
+            }
 
         } catch(\Exception $e){
             $resultResponse->setData($e);
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
-            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage('El usuario no existe');
         }
 
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
