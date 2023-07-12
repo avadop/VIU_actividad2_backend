@@ -4,6 +4,7 @@ use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\RecordatorioController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
@@ -25,23 +26,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // API CLIENTES
 Route::controller(ClienteController::class)->prefix('clientes')->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store');
-    Route::post('/{id}', 'update');
-    Route::put('/{id}', 'put');
-    Route::get('/{id}', 'show');
-    Route::delete('/{id}', 'destroy');
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::get('/{id}/mascotas', 'getMascotas');
+    Route::post('/', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
     Route::get('/log-in/{dni}/{password}', 'logIn');
 });
 
 // API MASCOTAS
 Route::controller(MascotaController::class)->prefix('mascotas')->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store');
-    Route::post('/{id}', 'update');
-    Route::put('/{id}', 'put');
-    Route::get('/{id}', 'show');
-    Route::delete('/{id}', 'destroy');
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::get('/{id}/cliente', 'getCliente');
+    Route::post('/', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
 }); 
 
 // RUTAS CITA
@@ -75,6 +76,17 @@ Route::controller(RecordatorioController::class)->prefix('recordatorios')->group
     Route::delete('/{id}', 'delete');
     Route::get('/mascota/{num_chip}', 'getRecordatoriosMascota');
     Route::get('/clinica/{id_clinica}', 'getRecordatoriosClinica');
-}); 
+});
+
+//RUTAS PRODUCTOS
+Route::controller(ProductoController::class)->prefix('productos')->group(function () {
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::post('/new', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+    Route::get('/nombre_producto/{nombre_}', 'getProductosNombre');
+   
+});
 
 

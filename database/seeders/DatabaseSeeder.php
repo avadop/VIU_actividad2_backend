@@ -24,7 +24,11 @@ class DatabaseSeeder extends Seeder
             MascotasTableSeeder::class,
             ClinicasTableSeeder::class,
             CitasTableSeeder::class,
-            RecordatoriosTableSeeder::class
+            RecordatoriosTableSeeder::class,
+            ProductosTableSeeder::class,
+            AlertasTableSeeder::class,
+            ComprasTableSeeder::class
+           
         ]);
     }
 }
