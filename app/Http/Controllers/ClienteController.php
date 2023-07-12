@@ -250,6 +250,27 @@ class ClienteController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
+    public function logIn($dni, $password) {
+        $resultResponse =  new ResultResponse();
+
+        try{
+            $cliente = Cliente::getClienteById($dni);
+            $cliente->checkClientPassword($dni, $password);
+            
+            $resultResponse->setData($cliente['dni']);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e);
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
     private function validaCliente($request)
     {
         $data = $request->all();

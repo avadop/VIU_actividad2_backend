@@ -31,6 +31,7 @@ Route::controller(ClienteController::class)->prefix('clientes')->group(function 
     Route::put('/{id}', 'put');
     Route::get('/{id}', 'show');
     Route::delete('/{id}', 'destroy');
+    Route::get('/log-in/{dni}/{password}', 'logIn');
 });
 
 // API MASCOTAS
