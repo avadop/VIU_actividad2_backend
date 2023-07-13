@@ -15,7 +15,6 @@ class Compra extends Model
     protected $keyType = 'integer';
 
     protected $fillable = [
-        'id_producto',
         'dni',
         'fecha_compra',
     ];
@@ -23,6 +22,10 @@ class Compra extends Model
     public static function getAllCompras()
     {
         return self::all();
+    }
+
+    public static function getCompraById($id) {
+        return self::findOrFail($id);
     }
 
     public function createCompra()

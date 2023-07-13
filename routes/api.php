@@ -90,12 +90,12 @@ Route::controller(ProductoController::class)->prefix('productos')->group(functio
    
 });
 
-//RUTAS COMPRAS
 Route::controller(CompraController::class)->prefix('compras')->group(function () {
     Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
     Route::post('/new', 'create');
-    Route::put('/{dni}', 'update');
-    Route::delete('/{dni}', 'delete');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
     Route::get('/dni/{dni}', 'getComprasDNI');
    
 });
