@@ -218,4 +218,30 @@ class ProductoController extends Controller
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
     }
+
+    private function validateProducto($request, $content)
+    {
+        $rules = [];
+
+        $validationRules = [
+            'nombre_producto' => 'required',
+            'marca' => 'required',
+            'imagen' => 'required',
+            'descripcion' => 'required',
+            'ficha_tecnica' => 'required',
+            'precio' => 'required',
+            'cantidad_disponible' => 'required',
+            'tipo_producto' => 'required'
+        ];
+
+        foreach ($validationRules as $field => $validationRule) {
+            if (isset($content[$field])) {
+                $rules[$field] = $validationRule;
+            }
+        }
+
+        $validatedData = $request->validate($rules);
+
+        return $validatedData;
+    }
 }
