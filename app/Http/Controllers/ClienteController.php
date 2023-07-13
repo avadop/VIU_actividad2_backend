@@ -212,13 +212,13 @@ class ClienteController extends Controller
                 $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
             } catch(\Exception $e){
-                $resultResponse->setData($e);
+                $resultResponse->setData(null);
                 $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
                 $resultResponse->setMessage('La contraseña introducida es incorrecta');
             }
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData(null);
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage('El usuario no existe');
         }
