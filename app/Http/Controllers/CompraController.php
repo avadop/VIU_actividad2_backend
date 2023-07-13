@@ -37,6 +37,27 @@ class CompraController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     public function getById($id)
+    {
+        $resultResponse =  new ResultResponse();
+
+        try {
+            $compra = Compra::getCompraById($id);
+
+            $resultResponse->setData($compra);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+
+        } catch(\Exception $e) {
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }       
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
      public function create(Request $request)
      {
         $requestContent = json_decode($request->getContent(), true);
@@ -167,5 +188,24 @@ class CompraController extends Controller
 
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
+    }
+    private function validateCompra($request, $content)
+    {
+        $rules = [];
+
+        $validationRules = [
+            'dni' => 'required',
+            'fecha_compra' => 'required'
+        ];
+
+        foreach ($validationRules as $field => $validationRule) {
+            if (isset($content[$field])) {
+                $rules[$field] = $validationRule;
+            }
+        }
+
+        $validatedData = $request->validate($rules);
+
+        return $validatedData;
     }
 }
