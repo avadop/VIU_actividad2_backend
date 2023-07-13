@@ -16,7 +16,7 @@ class Compra extends Model
 
     protected $fillable = [
         'dni',
-        'fecha_compra',
+        'fecha_compra'
     ];
 
     public static function getAllCompras()
