@@ -6,6 +6,7 @@ use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\RecordatorioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\AlertaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
@@ -89,6 +90,7 @@ Route::controller(ProductoController::class)->prefix('productos')->group(functio
    
 });
 
+//RUTAS COMPRAS
 Route::controller(CompraController::class)->prefix('compras')->group(function () {
     Route::get('/', 'getAll');
     Route::get('/{id}', 'getById');
@@ -98,3 +100,13 @@ Route::controller(CompraController::class)->prefix('compras')->group(function ()
     Route::get('/dni/{dni}', 'getComprasDNI');
    
 });
+
+//RUTAS ALERTAS
+Route::controller(AlertaController::class)->prefix('alertas')->group(function () {
+    Route::get('/', 'getAll');
+    Route::get('/{id}', 'getById');
+    Route::post('/new', 'create');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'delete');
+    Route::get('/id_producto/{id_producto}', 'getAlertasProducto');
+}); 
