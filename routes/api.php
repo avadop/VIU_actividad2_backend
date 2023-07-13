@@ -91,7 +91,7 @@ Route::controller(ProductoController::class)->prefix('productos')->group(functio
 
 Route::controller(CompraController::class)->prefix('compras')->group(function () {
     Route::get('/', 'getAll');
-    
+    Route::get('/{id}', 'getById');
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
