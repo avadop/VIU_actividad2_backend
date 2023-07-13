@@ -5,6 +5,7 @@ use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\MascotaController;
 use App\Http\Controllers\RecordatorioController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CompraController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
@@ -88,4 +89,12 @@ Route::controller(ProductoController::class)->prefix('productos')->group(functio
    
 });
 
-
+//RUTAS COMPRAS
+Route::controller(CompraController::class)->prefix('compras')->group(function () {
+    Route::get('/', 'getAll');
+    Route::post('/new', 'create');
+    Route::put('/{dni}', 'update');
+    Route::delete('/{dni}', 'delete');
+    Route::get('/dni/{dni}', 'getComprasDNI');
+   
+});
