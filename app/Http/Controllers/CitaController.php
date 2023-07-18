@@ -17,7 +17,7 @@ class CitaController extends Controller
     {
         $citas = Cita::getAllCitas();
        
-        $resultResponse =  new ResultResponse();
+        $resultResponse = new ResultResponse();
         $resultResponse->setData($citas);
         $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
         $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
@@ -46,6 +46,7 @@ class CitaController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -84,7 +85,7 @@ class CitaController extends Controller
         
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
@@ -111,27 +112,27 @@ class CitaController extends Controller
         try {
 
             $cita = Cita::getCitaById($id);
-            if( $requestContent['hora']) {
+            if(isset($requestContent['hora'])) {
                 $cita->hora = $requestContent['hora'];
             }
 
-            if($requestContent['fecha']) {
+            if(isset($requestContent['fecha'])) {
                 $cita->fecha = $requestContent['fecha'];
             }
 
-            if($requestContent['modalidad_cita']) {
+            if(isset($requestContent['modalidad_cita'])) {
                 $cita->modalidad_cita = $requestContent['modalidad_cita'];
             }
 
-            if($requestContent['tipo_cita']) {
+            if(isset($requestContent['tipo_cita'])) {
                 $cita->tipo_cita = $requestContent['tipo_cita'];
             }
 
-            if( $requestContent['num_chip']) {
+            if(isset($requestContent['num_chip'])) {
                 $cita->num_chip = $requestContent['num_chip'];
             }
 
-            if( $requestContent['id_clinica']) {
+            if(isset($requestContent['id_clinica'])) {
                 $cita->id_clinica = $requestContent['id_clinica'];
             }
 
@@ -142,7 +143,7 @@ class CitaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -170,7 +171,7 @@ class CitaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -189,8 +190,8 @@ class CitaController extends Controller
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
-
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -211,6 +212,7 @@ class CitaController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -231,6 +233,7 @@ class CitaController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       

@@ -44,8 +44,8 @@ class MascotaController extends Controller
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
-
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -72,7 +72,7 @@ class MascotaController extends Controller
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -107,14 +107,14 @@ class MascotaController extends Controller
                 'dni' => $requestContent['dni']
             ]);
 
-            $nuevaMascota->crearMascota();
+            $nuevaMascota->createMascota();
 
             $resultResponse->setData($nuevaMascota);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
@@ -140,48 +140,48 @@ class MascotaController extends Controller
         $resultResponse =  new ResultResponse();       
 
         try {
-
             $mascota = Mascota::getMascotaById($id);
-            if( $requestContent['nombre_mascota']) {
+
+            if(isset($requestContent['nombre_mascota'])) {
                 $mascota->nombre_mascota = $requestContent['nombre_mascota'];
             }
 
-            if($requestContent['edad']){
+            if(isset($requestContent['edad'])){
                 $mascota->edad = $requestContent['edad'];
             }
 
-            if($requestContent['sexo']){
+            if(isset($requestContent['sexo'])){
                 $mascota->sexo = $requestContent['sexo'];
             }
 
-            if($requestContent['especie']){
+            if(isset($requestContent['especie'])){
                 $mascota->especie = $requestContent['especie'];
             }
 
-            if( $requestContent['vacunas']) {
+            if(isset($requestContent['vacunas'])) {
                 $mascota->vacunas = $requestContent['vacunas'];
             }
 
-            if( $requestContent['informes_de_mascota']) {
+            if(isset($requestContent['informes_de_mascota'])) {
                 $mascota->informes_de_mascota = $requestContent['informes_de_mascota'];
             }
 
-            if( $requestContent['historial_clinico']) {
+            if(isset($requestContent['historial_clinico'])) {
                 $mascota->historial_clinico = $requestContent['historial_clinico'];
             }
 
-            if( $requestContent['dni']) {
+            if(isset($requestContent['dni'])) {
                 $mascota->dni = $requestContent['dni'];
             }
 
-            $mascota->actualizarMascota();
+            $mascota->updateMascota();
 
             $resultResponse->setData($mascota);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -209,7 +209,7 @@ class MascotaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }

@@ -39,23 +39,23 @@ class ProductoController extends Controller
 
      public function getById($id)
      {
-         $resultResponse =  new ResultResponse();
- 
-         try {
-             $producto = Producto::getProductoById($id);
- 
-             $resultResponse->setData($producto);
-             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
-             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
- 
- 
-         } catch(\Exception $e) {
-             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
-             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
-         }       
- 
-         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
-         return response($json)->header('Content-Type', 'application/json');
+        $resultResponse =  new ResultResponse();
+
+        try {
+        $producto = Producto::getProductoById($id);
+
+        $resultResponse->setData($producto);
+        $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+        $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+        } catch(\Exception $e) {
+        $resultResponse->setData($e->getMessage());
+        $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+        $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+        }       
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
      }
 
      /**
@@ -92,14 +92,10 @@ class ProductoController extends Controller
         
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
-
-        $resultResponse->setMessage($requestContent);
-
-
 
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
@@ -125,35 +121,35 @@ class ProductoController extends Controller
 
             $producto = Producto::getProductoById($id);
 
-            if($requestContent['nombre_producto']) {
+            if(isset($requestContent['nombre_producto'])) {
                 $producto->nombre_producto = $requestContent['nombre_producto'];
             }
 
-            if($requestContent['marca']) {
+            if(isset($requestContent['marca'])) {
                 $producto->marca = $requestContent['marca'];
             }
 
-            if($requestContent['imagen']) {
+            if(isset($requestContent['imagen'])) {
                 $producto->imagen = $requestContent['imagen'];
             }
 
-            if($requestContent['descripcion']) {
+            if(isset($requestContent['descripcion'])) {
                 $producto->descripcion = $requestContent['descripcion'];
             }
 
-            if( $requestContent['ficha_tecnica']) {
+            if(isset($requestContent['ficha_tecnica'])) {
                 $producto->ficha_tecnica = $requestContent['ficha_tecnica'];
             }
 
-            if( $requestContent['precio']) {
+            if(isset($requestContent['precio'])) {
                 $producto->precio = $requestContent['precio'];
             }
 
-            if($requestContent['cantidad_disponible']) {
+            if(isset($requestContent['cantidad_disponible'])) {
                 $producto->cantidad_disponible = $requestContent['cantidad_disponible'];
             }
 
-            if($requestContent['tipo_producto']) {
+            if(isset($requestContent['tipo_producto'])) {
                 $producto->tipo_producto = $requestContent['tipo_producto'];
             }
 
@@ -164,7 +160,7 @@ class ProductoController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -191,7 +187,7 @@ class ProductoController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -211,6 +207,7 @@ class ProductoController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       

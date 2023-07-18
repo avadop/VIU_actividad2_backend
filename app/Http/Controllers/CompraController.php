@@ -14,42 +14,41 @@ class CompraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function getAll()
-     {
+    public function getAll()
+    {
         $compras = Compra::getAllCompras();
-       
+        
         $resultResponse =  new ResultResponse();
         $resultResponse->setData($compras);
         $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
         $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);
-    
-        return response($json)->header('Content-Type', 'application/json');
 
-     }
+        return response($json)->header('Content-Type', 'application/json');
+    }
 
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $id
+     * @param  \Illuminate\Http\Request  $id_producto
+     * @param  \Illuminate\Http\Request  $dni
      * @return \Illuminate\Http\Response
      */
 
-     public function getById($id)
+    public function getById($id_producto, $dni)
     {
         $resultResponse =  new ResultResponse();
 
         try {
-            $compra = Compra::getCompraById($id);
+            $compra = Compra::getCompraById($id_producto, $dni);
 
             $resultResponse->setData($compra);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
-
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -58,18 +57,26 @@ class CompraController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
-     public function create(Request $request)
-     {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
         $this->validateCompra($request, $requestContent);
+
         try {
             $newCompra = new Compra([
+                'fecha_compra' => $requestContent['fecha_compra'],
                 'id_producto' => $requestContent['id_producto'],
                 'dni' => $requestContent['dni'],
-                'fecha_compra' => $requestContent['fecha_compra'],
             ]);
+
+            //var_dump($newCompra);
 
             $newCompra->createCompra();
 
@@ -79,19 +86,14 @@ class CompraController extends Controller
         
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
 
-        $resultResponse->setMessage($requestContent);
-
-
-
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
-
-     }
+    }
 
      /**
      * Update the specified resource in storage.
@@ -101,38 +103,37 @@ class CompraController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function update(Request $request, $id)
+    public function update(Request $request, $id_producto, $dni)
     {
         $requestContent = json_decode($request->getContent(), true);
-
         $this->validateCompra($request, $requestContent);
 
-        $resultResponse =  new ResultResponse();       
+        $resultResponse =  new ResultResponse();
 
         try {
 
-            $compra = Compra::getCompraById($id);
+            $compra = Compra::getCompraById($id_producto, $dni);
 
-            if($requestContent['id_producto']) {
+            if(isset($requestContent['id_producto'])) {
                 $compra->id_producto = $requestContent['id_producto'];
             }
 
-            if($requestContent['dni']) {
+            if(isset($requestContent['dni'])) {
                 $compra->dni = $requestContent['dni'];
             }
 
-            if($requestContent['fecha_compra']) {
+            if(isset($requestContent['fecha_compra'])) {
                 $compra->fecha_compra = $requestContent['fecha_compra'];
             }
 
-            $compra->updateCompra();
+            $compra->updateCompra($id_producto, $dni, $requestContent);
 
             $resultResponse->setData($compra);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -148,20 +149,20 @@ class CompraController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function delete(string $id)
+    public function delete(string $id_producto, string $dni)
     {
        $resultResponse =  new ResultResponse();
 
         try{
-            $compra = Compra::getCompraById($id);
-            $compra->deleteCompra();
+            $compra = Compra::getCompraById($id_producto, $dni);
+            $compra->deleteCompra($id_producto, $dni);
             
             $resultResponse->setData($compra);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -170,18 +171,29 @@ class CompraController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
-    public function getComprasDNI($dni) {
-        $resultResponse =  new ResultResponse();
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Compra  $dni
+     * @return \Illuminate\Http\Response
+     */
+    public function getComprasDNI(string $dni) 
+    {
+        $resultResponse = new ResultResponse();
 
         try {
             $compra = Compra::findComprasByDNI($dni);
+
+            if ($compra->isEmpty()) {
+                throw new \Exception('No query results for model [App\\Models\\Compra].');
+            }
 
             $resultResponse->setData($compra);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
-
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -189,11 +201,13 @@ class CompraController extends Controller
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
     }
+
     private function validateCompra($request, $content)
     {
         $rules = [];
 
         $validationRules = [
+            'id_producto' => 'required',
             'dni' => 'required',
             'fecha_compra' => 'required'
         ];

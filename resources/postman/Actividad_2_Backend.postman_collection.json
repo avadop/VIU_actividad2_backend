@@ -1,0 +1,2099 @@
+{
+	"info": {
+		"_postman_id": "7186aa03-91a1-432b-ae0d-85b8f97225f5",
+		"name": "Actividad_2_Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28582205"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Clientes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780C",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780C"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mascotas by id cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/12345678Z/mascotas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"12345678Z",
+										"mascotas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/log-in/12345678Z/pablo123!",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"log-in",
+										"12345678Z",
+										"pablo123!"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nuevo cliente",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dni\": \"24451780C\",\r\n    \"correo_electronico\": \"prueba@prueba.es\",\r\n    \"nombre\": \"Prueba\",\r\n    \"apellidos\": \"Inserta Cliente\",\r\n    \"telefono\": \"600000000\",\r\n    \"direccion\": \"Calle Falsa\",\r\n    \"contrasenya\": \"pass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"apellidos\": \"Update Cliente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780C",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780C"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina cliente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780C",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780C"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780X",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780X"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mascotas by id no cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/12345678A/mascotas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"12345678A",
+										"mascotas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nuevo no cliente",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dni\": \"24451780C\",\r\n    \"correo_electronico\": \"prueba@prueba.es\",\r\n    \"nombre\": \"Prueba\",\r\n    \"cosa\": \"Inserta Cliente\",\r\n    \"telefono\": \"600000000\",\r\n    \"direccion\": \"Calle Falsa\",\r\n    \"contrasenya\": \"pass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"apellidos\": \"Update Cliente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780X",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780X"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no cliente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780X",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780X"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Mascotas",
+			"item": [
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "Mascotas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mascota",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122334",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122334"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cliente by id mascota",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122334/cliente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122334",
+										"cliente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva mascota",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"num_chip\":1122335,\r\n   \"nombre_mascota\":\"Isi\",\r\n   \"edad\":5,\r\n   \"sexo\":\"F\",\r\n   \"especie\":\"gato\",\r\n   \"vacunas\":\"Rabia y polivalente\",\r\n   \"informes_de_mascota\":\"[\\\"analitica.doc\\\"]\",\r\n   \"historial_clinico\":\"mama\",\r\n   \"dni\":\"12345678Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica mascota",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"historial_clinico\":\"mama\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina mascota",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No mascota",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cliente by id no mascota",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335/cliente",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335",
+										"cliente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva  no mascota",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"num_chip\":1122335,\r\n   \"nombre_mascota\":\"Isi\",\r\n   \"cosa\":5,\r\n   \"sexo\":\"F\",\r\n   \"especie\":\"gato\",\r\n   \"vacunas\":\"Rabia y polivalente\",\r\n   \"informes_de_mascota\":\"[\\\"analitica.doc\\\"]\",\r\n   \"historial_clinico\":\"mama\",\r\n   \"dni\":\"12345678Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no mascota",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"historial_clinico\":\"mama\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no mascota",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Citas",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Citas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cita",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Citas de una mascota",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Citas de una clinica",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/clinica/123589746",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"clinica",
+										"123589746"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Citas por hora y fecha",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/10:00:00/2023-08-03",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"10:00:00",
+										"2023-08-03"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva cita",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"hora\": \"19:00:00\",\r\n    \"fecha\": \"2023-07-18\",\r\n    \"modalidad_cita\": \"online\",\r\n    \"tipo_cita\": \"consulta_general\",\r\n    \"id_clinica\": 123589746,\r\n    \"num_chip\": 1234567\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/citas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica cita",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hora\": \"20:00:00\",\r\n    \"fecha\": \"2023-11-18\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/citas/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina cita",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No cita",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva no cita",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"hora\": \"19:00:00\",\r\n    \"fecha\": \"2023-07-18\",\r\n    \"modalidad_cita\": \"online\",\r\n    \"tipo_cita\": \"consulta_general\",\r\n    \"id_clinica\": 123589746,\r\n    \"cosa\": 1234567\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/citas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no cita",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hora\": \"20:00:00\",\r\n    \"fecha\": \"2023-11-18\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/citas/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no cita",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/citas/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Clinicas",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Clinicas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clinicas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Clinica",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clinicas/123589746",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"123589746"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva clinica",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"id_clinica\": 111,\r\n    \"nombre\": \"Prueba insert\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica clinica",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Prueba update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/111",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"111"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina clinica",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clinicas/111",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"111"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No clinica",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clinicas/123",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva no clinica",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"id_clinica\": 111,\r\n    \"cosa\": \"Prueba insert\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no clinica",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Prueba update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/111",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"111"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no clinica",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/clinicas/111",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"111"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Recordatorios",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Recordatorios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Recordatorio",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Recordatorios de una mascota",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios/mascota/7896541",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"mascota",
+										"7896541"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Recordatorios de una clinica",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios/clinica/123589746",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"clinica",
+										"123589746"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nuevo recordatorio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_inicio\": \"2022-03-29\",\r\n    \"periodicidad\": 365,\r\n    \"motivo\": \"PRUEBA INSERT\",\r\n    \"metodo_envio\": \"sms\",\r\n    \"id_clinica\": 123589746,\r\n    \"num_chip\": 7896541\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica recordatorio",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n      \"motivo\": \"PRUEBA update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina recordatorio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No recordatorio",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nuevo no recordatorio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_inicio\": \"2022-03-29\",\r\n    \"periodicidad\": 365,\r\n    \"motivo\": \"PRUEBA INSERT\",\r\n    \"metodo_envio\": \"sms\",\r\n    \"cosa\": 123589746,\r\n    \"num_chip\": 7896541\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no recordatorio",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n      \"cosa\": \"PRUEBA update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no recordatorio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/recordatorios/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Productos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/productos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Producto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/productos/6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Productos por nombre",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/productos/nombre_producto/Comida perro 3kg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"nombre_producto",
+										"Comida perro 3kg"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nuevo producto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre_producto\": \"Prueaba insert\",\r\n    \"marca\": \"VIUpets\",\r\n    \"imagen\": \"comida.png\",\r\n    \"descripcion\": \"Comida saludable de la propia clinica\",\r\n    \"ficha_tecnica\": \"Saco de 3kg\",\r\n    \"precio\": 20.15,\r\n    \"cantidad_disponible\": 10,\r\n    \"tipo_producto\": \"comida\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre_producto\": \"Prueaba update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"15"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina producto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/productos/15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"15"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No producto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/productos/20",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nuevo no producto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre_producto\": \"Prueaba insert\",\r\n    \"cosa\": \"VIUpets\",\r\n    \"imagen\": \"comida.png\",\r\n    \"descripcion\": \"Comida saludable de la propia clinica\",\r\n    \"ficha_tecnica\": \"Saco de 3kg\",\r\n    \"precio\": 20.15,\r\n    \"cantidad_disponible\": 10,\r\n    \"tipo_producto\": \"comida\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no producto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre_producto\": \"Prueaba update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/16",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"16"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no producto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/productos/30",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"30"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Compras",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Compras",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/compras",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Compra",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/compras/1/12345678Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"1",
+										"12345678Z"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Compras cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/compras/cliente/dni/01189877H",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"cliente",
+										"dni",
+										"01189877H"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva compra",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"id_producto\": 1,\r\n    \"dni\": \"12345678Z\",\r\n    \"fecha_compra\": \"2023-07-18\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica compra",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_compra\": \"1111-07-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/1/12345678Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"1",
+										"12345678Z"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina compra",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/compras/1/12345678Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"1",
+										"12345678Z"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "Compras no cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/compras/cliente/dni/12345678Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"cliente",
+										"dni",
+										"12345678Z"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nueva no compra",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"id_producto\": 1,\r\n    \"dni\": \"12345678Z\",\r\n    \"cosa\": \"2023-07-18\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no compra",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fecha_compra\": \"1111-07-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/1/12345678T",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"1",
+										"12345678T"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Elimina no compra",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/compras/1/12345678P",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"1",
+										"12345678P"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Alertas",
+			"item": [
+				{
+					"name": "OKs",
+					"item": [
+						{
+							"name": "Alertas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/alertas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alerta",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/alertas/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear alerta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mensaje\": \"Prueba insert\",\r\n    \"stock_restante\": 10,\r\n    \"fecha_alerta\": \"2023-07-18\",\r\n    \"id_producto\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar alerta",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"mensaje\": \"Prueba update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar alerta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/alertas/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "KOs",
+					"item": [
+						{
+							"name": "No alerta",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/alertas/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear no alerta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cosa\": \"Prueba insert\",\r\n    \"stock_restante\": 10,\r\n    \"fecha_alerta\": \"2023-07-18\",\r\n    \"id_producto\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar no alerta",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"mensaje\": \"Prueba update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar no alerta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/alertas/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

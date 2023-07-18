@@ -47,6 +47,7 @@ class RecordatorioController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -85,14 +86,10 @@ class RecordatorioController extends Controller
         
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
-
-        $resultResponse->setMessage($requestContent);
-
-
 
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
@@ -108,7 +105,6 @@ class RecordatorioController extends Controller
     public function update(Request $request, $id)
     {
         $requestContent = json_decode($request->getContent(), true);
-
         $this->validateRecordatorio($request, $requestContent);
 
         $resultResponse =  new ResultResponse();       
@@ -117,27 +113,27 @@ class RecordatorioController extends Controller
 
             $recordatorio = Recordatorio::getRecordatorioById($id);
 
-            if($requestContent['fecha_inicio']) {
+            if(isset($requestContent['fecha_inicio'])) {
                 $recordatorio->fecha_inicio = $requestContent['fecha_inicio'];
             }
 
-            if($requestContent['periodicidad']) {
+            if(isset($requestContent['periodicidad'])){
                 $recordatorio->periodicidad = $requestContent['periodicidad'];
             }
 
-            if($requestContent['motivo']) {
+            if(isset($requestContent['motivo'])) {
                 $recordatorio->motivo = $requestContent['motivo'];
             }
 
-            if($requestContent['metodo_envio']) {
+            if(isset($requestContent['metodo_envio'])) {
                 $recordatorio->metodo_envio = $requestContent['metodo_envio'];
             }
 
-            if( $requestContent['num_chip']) {
+            if(isset($requestContent['num_chip'])) {
                 $recordatorio->num_chip = $requestContent['num_chip'];
             }
 
-            if( $requestContent['id_clinica']) {
+            if(isset($requestContent['id_clinica'])) {
                 $recordatorio->id_clinica = $requestContent['id_clinica'];
             }
 
@@ -148,7 +144,7 @@ class RecordatorioController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -176,7 +172,7 @@ class RecordatorioController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -197,6 +193,7 @@ class RecordatorioController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -217,6 +214,7 @@ class RecordatorioController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       

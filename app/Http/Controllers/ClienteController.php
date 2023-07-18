@@ -34,14 +34,16 @@ class ClienteController extends Controller
      */
     public function getById(string $id)
     {
-        $cliente = Cliente::getClienteById($id);        
-
+        $resultResponse = new ResultResponse();
+        
         try {
-            $resultResponse =  new ResultResponse();
+            $cliente = Cliente::getClienteById($id);        
+
             $resultResponse->setData($cliente);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
         } catch (\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -68,7 +70,7 @@ class ClienteController extends Controller
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -88,7 +90,7 @@ class ClienteController extends Controller
         $resultResponse =  new ResultResponse();      
         $requestContent = json_decode($request->getContent(), true);  
         
-        $this->validaCliente($request);
+        $this->validaCliente($request, $requestContent);
         try {
             $nuevoCliente = new Cliente([
                 'dni' => $requestContent['dni'],
@@ -100,7 +102,6 @@ class ClienteController extends Controller
                 'telefono' => $requestContent['telefono']
             ]);
 
-            // Cliente::createCliente($nuevoCliente);
             $nuevoCliente->createCliente();
 
             $resultResponse->setData($nuevoCliente);
@@ -108,7 +109,7 @@ class ClienteController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
@@ -129,39 +130,39 @@ class ClienteController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $this->validaCliente($request, $requestContent);
 
-        $resultResponse =  new ResultResponse();       
+        $resultResponse =  new ResultResponse();   
 
         try {
-
             $cliente = Cliente::getClienteById($id);
-            if($requestContent['direccion']) {
+
+            if(isset($requestContent['direccion'])) {
                 $cliente->direccion = $requestContent['direccion'];
             }
 
-            if($requestContent['nombre']){
+            if(isset($requestContent['nombre'])){
                 $cliente->nombre = $requestContent['nombre'];
             }
 
-            if($requestContent['apellidos']){
+            if(isset($requestContent['apellidos'])){
                 $cliente->apellidos = $requestContent['apellidos'];
             }
 
-            if($requestContent['telefono']){
+            if(isset($requestContent['telefono'])){
                 $cliente->telefono = $requestContent['telefono'];
             }
 
-            if( $requestContent['correo_electronico']) {
+            if(isset($requestContent['correo_electronico'])) {
                 $cliente->correo_electronico = $requestContent['correo_electronico'];
             }
 
-            $cliente->actualizarCliente();
+            $cliente->updateCliente();
 
             $resultResponse->setData($cliente);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -189,7 +190,7 @@ class ClienteController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -212,13 +213,13 @@ class ClienteController extends Controller
                 $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
             } catch(\Exception $e){
-                $resultResponse->setData(null);
+                $resultResponse->setData($e->getMessage());
                 $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
                 $resultResponse->setMessage('La contraseña introducida es incorrecta');
             }
 
         } catch(\Exception $e){
-            $resultResponse->setData(null);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage('El usuario no existe');
         }

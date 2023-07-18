@@ -46,6 +46,7 @@ class ClinicaController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -81,7 +82,7 @@ class ClinicaController extends Controller
         
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
@@ -108,11 +109,11 @@ class ClinicaController extends Controller
         try {
 
             $clinica = Clinica::getClinicaById($id);
-            if( $requestContent['id_clinica']) {
+            if(isset($requestContent['id_clinica'])) {
                 $clinica->id_clinica = $requestContent['id_clinica'];
             }
 
-            if( $requestContent['nombre']) {
+            if(isset($requestContent['nombre'])) {
                 $clinica->nombre = $requestContent['nombre'];
             }
 
@@ -123,7 +124,7 @@ class ClinicaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -151,7 +152,7 @@ class ClinicaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }

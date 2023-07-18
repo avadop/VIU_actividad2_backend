@@ -39,7 +39,7 @@ class AlertaController extends Controller
         $resultResponse =  new ResultResponse();
 
         try {
-            $alertas = Alerta::getCitaById($id);
+            $alertas = Alerta::getAlertaById($id);
 
             $resultResponse->setData($alertas);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
@@ -47,6 +47,7 @@ class AlertaController extends Controller
 
 
         } catch(\Exception $e) {
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }       
@@ -68,6 +69,7 @@ class AlertaController extends Controller
         $resultResponse =  new ResultResponse();  
 
         $this->validateAlerta($request, $requestContent);
+
         try {
             $newAlerta = new Alerta([
                 'mensaje' => $requestContent['mensaje'],
@@ -76,7 +78,7 @@ class AlertaController extends Controller
                 'id_producto' => $requestContent['id_producto'],
             ]);
 
-            $newAlerta->createCita();
+            $newAlerta->createAlerta();
 
             $resultResponse->setData($newAlerta);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
@@ -84,7 +86,7 @@ class AlertaController extends Controller
         
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_CODE);
         }
@@ -112,22 +114,21 @@ class AlertaController extends Controller
         try {
 
             $alerta = Alerta::getAlertaById($id);
-            if( $requestContent['mensaje']) {
+            if(isset($requestContent['mensaje'])) {
                 $alerta->mensaje = $requestContent['mensaje'];
             }
 
-            if($requestContent['stock_restante']) {
+            if(isset($requestContent['stock_restante'])) {
                 $alerta->stock_restante = $requestContent['stock_restante'];
             }
 
-            if($requestContent['fecha_alerta']) {
+            if(isset($requestContent['fecha_alerta'])){
                 $alerta->fecha_alerta = $requestContent['fecha_alerta'];
             }
 
-            if($requestContent['id_producto']) {
+            if(isset($requestContent['id_producto'])) {
                 $alerta->id_producto = $requestContent['id_producto'];
             }
-
 
             $alerta->updateAlerta();
 
@@ -136,7 +137,7 @@ class AlertaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }
@@ -164,7 +165,7 @@ class AlertaController extends Controller
             $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 
         } catch(\Exception $e){
-            $resultResponse->setData($e);
+            $resultResponse->setData($e->getMessage());
             $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
             $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
         }

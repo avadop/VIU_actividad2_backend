@@ -27,7 +27,7 @@ class ClientesTableSeeder extends Seeder
                 'dni' => '12345678Z',
                 'correo_electronico' => 'pablo@gmail.com',
                 'direccion' => 'Galicia',
-                'nombre' => 'Palbo',
+                'nombre' => 'Pablo',
                 'apellidos' => 'Vazquez Fernandez',
                 'telefono' => 912547896,
                 'contrasenya' => 'pablo123!',

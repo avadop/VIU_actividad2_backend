@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->unsignedInteger('id_producto');
             $table->string('dni', 9);
-            $table->string('compras_dni', 9)->nullable();
             $table->date('fecha_compra');
             $table->primary(['id_producto', 'dni']);
-            $table->foreign('compras_dni')->references('dni')->on('clientes')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('dni')->references('dni')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_producto')->references('id_producto')->on('productos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

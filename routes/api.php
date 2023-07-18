@@ -31,7 +31,7 @@ Route::controller(ClienteController::class)->prefix('clientes')->group(function 
     Route::get('/', 'getAll');
     Route::get('/{id}', 'getById');
     Route::get('/{id}/mascotas', 'getMascotas');
-    Route::post('/', 'create');
+    Route::post('/new', 'create');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
     Route::get('/log-in/{dni}/{password}', 'logIn');
@@ -42,7 +42,7 @@ Route::controller(MascotaController::class)->prefix('mascotas')->group(function 
     Route::get('/', 'getAll');
     Route::get('/{id}', 'getById');
     Route::get('/{id}/cliente', 'getCliente');
-    Route::post('/', 'create');
+    Route::post('/new', 'create');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'delete');
 }); 
@@ -94,11 +94,11 @@ Route::controller(ProductoController::class)->prefix('productos')->group(functio
 //RUTAS COMPRAS
 Route::controller(CompraController::class)->prefix('compras')->group(function () {
     Route::get('/', 'getAll');
-    Route::get('/{id}', 'getById');
+    Route::get('/{id_producto}/{dni}', 'getById');
     Route::post('/new', 'create');
-    Route::put('/{id}', 'update');
-    Route::delete('/{id}', 'delete');
-    Route::get('/dni/{dni}', 'getComprasDNI');
+    Route::put('/{id_producto}/{dni}', 'update');
+    Route::delete('/{id_producto}/{dni}', 'delete');
+    Route::get('/cliente/dni/{dni}', 'getComprasDNI');
    
 });
 

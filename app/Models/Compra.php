@@ -10,13 +10,14 @@ class Compra extends Model
     use HasFactory;
 
     protected $table = 'compras';
-    protected $primaryKey = 'id_producto';
+    protected $primaryKey = ['dni', 'id_producto'];
     public $incrementing = false;
     protected $keyType = 'integer';
 
     protected $fillable = [
+        'fecha_compra',
+        'id_producto',
         'dni',
-        'fecha_compra'
     ];
 
     public static function getAllCompras()
@@ -24,8 +25,11 @@ class Compra extends Model
         return self::all();
     }
 
-    public static function getCompraById($id) {
-        return self::findOrFail($id);
+    public static function getCompraById($id_producto, $dni) 
+    {
+        return self::where('id_producto', $id_producto)
+                ->where('dni', $dni)
+                ->firstOrFail();
     }
 
     public function createCompra()
@@ -33,17 +37,23 @@ class Compra extends Model
         return self::save();
     }
 
-    public function updateCompra()
+    public function updateCompra($id_producto, $dni, $requestContent)
     {
-        return self::save();
+        return self::where('id_producto', $id_producto)
+            ->where('dni', $dni)
+            ->update($requestContent);
     }
 
-    public function deleteCompra()
+
+    public function deleteCompra($id_producto, $dni)
     {
-        return self::delete();
+        return self::where('id_producto', $id_producto)
+            ->where('dni', $dni)
+            ->delete();
     }
     
-    public static function findComprasByDNI($dni){
+    public static function findComprasByDNI($dni)
+    {
         return self::where('dni', $dni)->get();
     }
 }
