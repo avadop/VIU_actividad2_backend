@@ -102,11 +102,12 @@ class MascotaController extends Controller
                 'sexo' => $requestContent['sexo'],
                 'especie' => $requestContent['especie'],
                 'vacunas' => $requestContent['vacunas'],
-                'informes_de_mascota' => $requestContent['informes_de_mascota'],
+                'informes_de_mascota' => json_encode($requestContent['informes_de_mascota']),
                 'historial_clinico' => $requestContent['historial_clinico'],
                 'dni' => $requestContent['dni']
             ]);
 
+            $nuevaMascota->implode('informes_de_mascota', ', ');
             $nuevaMascota->createMascota();
 
             $resultResponse->setData($nuevaMascota);
@@ -220,7 +221,6 @@ class MascotaController extends Controller
 
     private function validaMascota($request, $content)
     {
-        $data = $request->all();
         $rules = [];
 
         $validationRules = [
