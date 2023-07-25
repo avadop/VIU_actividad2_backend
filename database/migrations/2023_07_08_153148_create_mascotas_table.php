@@ -24,6 +24,7 @@ return new class extends Migration
             $table->primary('num_chip');
             $table->foreign('dni')->references('dni')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('cantidad_disponible');
             $table->enum('tipo_producto', ['comida', 'accesorio', 'medicamento', 'vacunas', 'peluqueria']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

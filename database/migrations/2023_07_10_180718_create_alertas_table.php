@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('id_producto')->unsigned();
             $table->foreign('id_producto')->references('id_producto')->on('productos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

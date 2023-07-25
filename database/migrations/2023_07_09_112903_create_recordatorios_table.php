@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('id_clinica')->references('id_clinica')->on('clinicas')->onDelete('restrict')->onUpdate('restrict');
             $table->foreign('num_chip')->references('num_chip')->on('mascotas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

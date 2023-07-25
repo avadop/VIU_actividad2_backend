@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre')->nullable();
             $table->primary('id_clinica');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
