@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "7186aa03-91a1-432b-ae0d-85b8f97225f5",
-		"name": "Actividad_2_Backend",
+		"_postman_id": "6661a36e-eb80-4e5a-a415-b8dec6060bc7",
+		"name": "Actividad_2_Backend Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28582205"
 	},
@@ -89,6 +89,39 @@
 										"log-in",
 										"12345678Z",
 										"pablo123!"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"pablo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -219,6 +252,39 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"pabasdasdlo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Nuevo no cliente",
 							"request": {
 								"method": "POST",
@@ -304,7 +370,7 @@
 			"name": "Mascotas",
 			"item": [
 				{
-					"name": "KOs",
+					"name": "OKs",
 					"item": [
 						{
 							"name": "Mascotas",
@@ -320,6 +386,39 @@
 									"path": [
 										"api",
 										"mascotas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"MAU\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -491,6 +590,39 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"MAasdasdU\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Nueva  no mascota",
 							"request": {
 								"method": "POST",
@@ -622,7 +754,10 @@
 							"name": "Citas de una mascota",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -663,6 +798,39 @@
 										"citas",
 										"10:00:00",
 										"2023-08-03"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"prese\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/citas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -766,6 +934,39 @@
 										"api",
 										"citas",
 										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"lalala\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -899,6 +1100,39 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"123589746\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Nueva clinica",
 							"request": {
 								"method": "POST",
@@ -996,6 +1230,39 @@
 										"api",
 										"clinicas",
 										"123"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"0s0s0s0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -1171,13 +1438,46 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"VACUNAS\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Nuevo recordatorio",
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"fecha_inicio\": \"2022-03-29\",\r\n    \"periodicidad\": 365,\r\n    \"motivo\": \"PRUEBA INSERT\",\r\n    \"metodo_envio\": \"sms\",\r\n    \"id_clinica\": 123589746,\r\n    \"num_chip\": 7896541\r\n}",
+									"raw": "{\r\n    \"fecha_inicio\": \"2022-03-29\",\r\n    \"periodicidad\": 365,\r\n    \"motivo\": \"PRUEBA RECORDATORIO\",\r\n    \"metodo_envio\": \"sms\",\r\n    \"id_clinica\": 123589746,\r\n    \"num_chip\": 7755689\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1268,6 +1568,39 @@
 										"api",
 										"recordatorios",
 										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"sasdsds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -1422,6 +1755,39 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"Comida\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Nuevo producto",
 							"request": {
 								"method": "POST",
@@ -1519,6 +1885,39 @@
 										"api",
 										"productos",
 										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"asdasd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -1675,6 +2074,39 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"2023-03-07\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Nueva compra",
 							"request": {
 								"method": "POST",
@@ -1776,6 +2208,39 @@
 										"cliente",
 										"dni",
 										"12345678Z"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"20asdasd7\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"advance",
+										"search"
 									]
 								}
 							},
@@ -1911,6 +2376,39 @@
 							"response": []
 						},
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"bajo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Crear alerta",
 							"request": {
 								"method": "POST",
@@ -2008,6 +2506,39 @@
 										"api",
 										"alertas",
 										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"asdasd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"advance",
+										"search"
 									]
 								}
 							},
