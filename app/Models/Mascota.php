@@ -40,7 +40,7 @@ class Mascota extends Model
 
     public function createMascota()
     {
-        return $this->save();
+        return self::save();
     }
 
     public function updateMascota()

@@ -16,12 +16,13 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function getAll()
+     public function getAll(Request $request)
      {
-        $producto = Producto::getAllProductos();
+        $perPage = intval($request->input('per_page'));
+        $productos = Producto::getAllProductos($perPage);
        
         $resultResponse =  new ResultResponse();
-        $resultResponse->setData($producto);
+        $resultResponse->setData($productos);
         $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
         $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
 

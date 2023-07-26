@@ -16,6 +16,10 @@ class MascotaController extends Controller
     public function getAll()
     {
         $mascotas = Mascota::getAllMascotas();
+        foreach ($mascotas as $mascota) {
+            $informes = json_decode($mascota->informes_de_mascota, true);
+            $mascota->informes_de_mascota = $informes;
+        }
        
         $resultResponse =  new ResultResponse();
         $resultResponse->setData($mascotas);
@@ -39,6 +43,8 @@ class MascotaController extends Controller
 
         try {
             $mascota = Mascota::getMascotaById($id);
+            $informes = json_decode($mascota->informes_de_mascota, true);
+            $mascota->informes_de_mascota = $informes;
 
             $resultResponse->setData($mascota);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
@@ -67,6 +73,10 @@ class MascotaController extends Controller
         try{
             $mascota = Mascota::getMascotaById($id);
             $mascotas = $mascota->cliente;
+            foreach ($mascotas as $mascota) {
+                $informes = json_decode($mascota->informes_de_mascota, true);
+                $mascota->informes_de_mascota = $informes;
+            }
 
             $resultResponse->setData($mascotas);
             $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);

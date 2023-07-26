@@ -26,8 +26,8 @@ class Producto extends Model
     ];
 
     
-    public static function getAllProductos() {
-        return self::all();
+    public static function getAllProductos($perPage) {
+        return self::paginate($perPage);
     }
 
     public static function getProductoById($id) {
