@@ -58,4 +58,13 @@ class Compra extends Model
     {
         return self::where('dni', $dni)->get();
     }
+
+    public static function searchCompras($aBuscar)
+    {
+       return self::query()
+            ->where('fecha_compra', 'like', "%$aBuscar%")
+            ->orWhere('id_producto', 'like', "%$aBuscar%")
+            ->orWhere('dni', 'like', "%$aBuscar%")
+            ->get();
+    }
 }

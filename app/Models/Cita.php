@@ -57,4 +57,16 @@ class Cita extends Model
     public static function findCitaByDateAndTime($hora, $fecha){
         return self::where('hora', $hora)->where('fecha', $fecha)->get();
     }
+
+    public static function searchCitas($aBuscar)
+    {
+       return self::query()
+            ->where('hora', 'like', "%$aBuscar%")
+            ->orWhere('fecha', 'like', "%$aBuscar%")
+            ->orWhere('modalidad_cita', 'like', "%$aBuscar%")
+            ->orWhere('tipo_cita', 'like', "%$aBuscar%")
+            ->orWhere('id_clinica', 'like', "%$aBuscar%")
+            ->orWhere('num_chip', 'like', "%$aBuscar%")
+            ->get();
+    }
 }

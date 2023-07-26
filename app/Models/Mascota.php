@@ -57,4 +57,19 @@ class Mascota extends Model
     {
         return self::belongsTo(Cliente::class, 'dni', 'dni');
     }
+
+    public static function searchMascotas($aBuscar)
+    {
+       return self::query()
+            ->where('num_chip', 'like', "%$aBuscar%")
+            ->orWhere('nombre_mascota', 'like', "%$aBuscar%")
+            ->orWhere('edad', 'like', "%$aBuscar%")
+            ->orWhere('sexo', 'like', "%$aBuscar%")
+            ->orWhere('especie', 'like', "%$aBuscar%")
+            ->orWhere('vacunas', 'like', "%$aBuscar%")
+            ->orWhere('informes_de_mascota', 'like', "%$aBuscar%")
+            ->orWhere('historial_clinico', 'like', "%$aBuscar%")
+            ->orWhere('dni', 'like', "%$aBuscar%")
+            ->get();
+    }
 }

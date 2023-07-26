@@ -223,6 +223,34 @@ class RecordatorioController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
+      /**
+     * Search recordatorios by a given search term.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $requestData = $request->json()->all();
+        $searchTerm = isset($requestData['search_term']) ? $requestData['search_term'] : '';
+        $resultResponse = new ResultResponse();
+
+        $recordatorios = Recordatorio::searchRecordatorios($searchTerm);
+
+        if ($recordatorios->isEmpty()) {
+            $resultResponse->setData("No existen recordatorios para los criterios de búsqueda.");
+            $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);            
+        } else {
+            $resultResponse->setData($recordatorios);
+            $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+        }       
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
     private function validateRecordatorio($request, $content)
     {
         $rules = [];

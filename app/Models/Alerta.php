@@ -50,4 +50,14 @@ class Alerta extends Model
         return self::where('id_producto', $id_producto)->get();
     }
 
+    public static function searchAlertas($aBuscar)
+    {
+       return self::query()
+            ->where('mensaje', 'like', "%$aBuscar%")
+            ->orWhere('stock_restante', 'like', "%$aBuscar%")
+            ->orWhere('fecha_alerta', 'like', "%$aBuscar%")
+            ->orWhere('id_producto', 'like', "%$aBuscar%")
+            ->get();
+    }
+
 }

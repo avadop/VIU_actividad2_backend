@@ -54,4 +54,16 @@ class Recordatorio extends Model
     public static function findRecordatoriosByIdClinica($idClinica){
         return self::where('id_clinica', $idClinica)->get();
     }
+
+    public static function searchRecordatorios($aBuscar)
+    {
+       return self::query()
+            ->where('fecha_inicio', 'like', "%$aBuscar%")
+            ->orWhere('periodicidad', 'like', "%$aBuscar%")
+            ->orWhere('motivo', 'like', "%$aBuscar%")
+            ->orWhere('metodo_envio', 'like', "%$aBuscar%")
+            ->orWhere('num_chip', 'like', "%$aBuscar%")
+            ->orWhere('id_clinica', 'like', "%$aBuscar%")
+            ->get();
+    }
 }

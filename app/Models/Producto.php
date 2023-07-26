@@ -52,4 +52,18 @@ class Producto extends Model
     public static function findProductosByName($name_){
         return self::where('nombre_producto', $name_)->get();
     }
+
+    public static function searchProductos($aBuscar)
+    {
+       return self::query()
+            ->where('nombre_producto', 'like', "%$aBuscar%")
+            ->orWhere('marca', 'like', "%$aBuscar%")
+            ->orWhere('imagen', 'like', "%$aBuscar%")
+            ->orWhere('descripcion', 'like', "%$aBuscar%")
+            ->orWhere('ficha_tecnica', 'like', "%$aBuscar%")
+            ->orWhere('precio', 'like', "%$aBuscar%")
+            ->orWhere('cantidad_disponible', 'like', "%$aBuscar%")
+            ->orWhere('tipo_producto', 'like', "%$aBuscar%")
+            ->get();
+    }
 }

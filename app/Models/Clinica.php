@@ -44,4 +44,12 @@ class Clinica extends Model
         return self::delete();
     }
 
+    public static function searchClinicas($aBuscar)
+    {
+       return self::query()
+            ->where('id_clinica', 'like', "%$aBuscar%")
+            ->orWhere('nombre', 'like', "%$aBuscar%")
+            ->get();
+    }
+
 }

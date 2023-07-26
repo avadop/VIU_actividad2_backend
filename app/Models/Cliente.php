@@ -60,4 +60,17 @@ class Cliente extends Model
     {
         return self::where([['dni','=',$dni],['contrasenya','=',$contrasenya]])->firstOrFail();
     }
+
+    public static function searchClientes($aBuscar)
+    {
+       return self::query()
+            ->where('dni', 'like', "%$aBuscar%")
+            ->orWhere('correo_electronico', 'like', "%$aBuscar%")
+            ->orWhere('direccion', 'like', "%$aBuscar%")
+            ->orWhere('nombre', 'like', "%$aBuscar%")
+            ->orWhere('apellidos', 'like', "%$aBuscar%")
+            ->orWhere('contrasenya', 'like', "%$aBuscar%")
+            ->orWhere('telefono', 'like', "%$aBuscar%")
+            ->get();
+    }
 }
