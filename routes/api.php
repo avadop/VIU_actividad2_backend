@@ -33,6 +33,7 @@ Route::controller(ClienteController::class)->prefix('clientes')->group(function 
     Route::get('/{id}/mascotas', 'getMascotas');
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
     Route::get('/log-in/{dni}/{password}', 'logIn');
     Route::get('/advance/search', 'search'); 
@@ -46,6 +47,7 @@ Route::controller(MascotaController::class)->prefix('mascotas')->group(function 
     Route::get('/advance/search', 'search'); 
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
 }); 
 

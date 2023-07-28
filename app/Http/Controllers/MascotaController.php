@@ -100,11 +100,12 @@ class MascotaController extends Controller
     public function create(Request $request)
     {
         $requestContent = json_decode($request->getContent(), true);
-        $this->validaMascota($request, $requestContent);
 
         $resultResponse =  new ResultResponse();    
 
         try {
+            $this->validaMascota($request, $requestContent);
+
             $nuevaMascota = new Mascota([
                 'num_chip' => $requestContent['num_chip'],
                 'nombre_mascota' => $requestContent['nombre_mascota'],
@@ -134,8 +135,6 @@ class MascotaController extends Controller
         return response($json)->header('Content-Type', 'application/json');
     }
 
-  
-
     /**
      * Update the specified resource in storage.
      *
@@ -146,7 +145,77 @@ class MascotaController extends Controller
     public function update(Request $request, string $id)
     {
         $requestContent = json_decode($request->getContent(), true);
-        $this->validaMascota($request, $requestContent);
+
+        $resultResponse =  new ResultResponse();       
+
+        try {
+            $this->validaMascota($request, $requestContent);
+
+            try {
+                $mascota = Mascota::getMascotaById($id);
+
+                if($requestContent['nombre_mascota']) {
+                    $mascota->nombre_mascota = $requestContent['nombre_mascota'];
+                }
+
+                if($requestContent['edad']){
+                    $mascota->edad = $requestContent['edad'];
+                }
+
+                if($requestContent['sexo']){
+                    $mascota->sexo = $requestContent['sexo'];
+                }
+
+                if($requestContent['especie']){
+                    $mascota->especie = $requestContent['especie'];
+                }
+
+                if($requestContent['vacunas']) {
+                    $mascota->vacunas = $requestContent['vacunas'];
+                }
+
+                if($requestContent['informes_de_mascota']) {
+                    $mascota->informes_de_mascota = $requestContent['informes_de_mascota'];
+                }
+
+                if($requestContent['historial_clinico']) {
+                    $mascota->historial_clinico = $requestContent['historial_clinico'];
+                }
+
+                if($requestContent['dni']) {
+                    $mascota->dni = $requestContent['dni'];
+                }
+
+                $mascota->updateMascota();
+
+                $resultResponse->setData($mascota);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Mascota  $mascota
+     * @return \Illuminate\Http\Response
+     */
+    public function patch(Request $request, string $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();       
 
@@ -275,7 +344,7 @@ class MascotaController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

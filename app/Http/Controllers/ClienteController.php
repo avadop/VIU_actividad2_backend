@@ -90,8 +90,9 @@ class ClienteController extends Controller
         $resultResponse =  new ResultResponse();      
         $requestContent = json_decode($request->getContent(), true);  
         
-        $this->validaCliente($request, $requestContent);
         try {
+            $this->validaCliente($request, $requestContent);
+
             $nuevoCliente = new Cliente([
                 'dni' => $requestContent['dni'],
                 'correo_electronico' => $requestContent['correo_electronico'],
@@ -128,7 +129,66 @@ class ClienteController extends Controller
     public function update(Request $request, string $id)
     {
         $requestContent = json_decode($request->getContent(), true);
-        $this->validaCliente($request, $requestContent);
+
+        $resultResponse =  new ResultResponse();   
+
+        try {
+            $this->validaCliente($request, $requestContent);
+
+            try {
+                $cliente = Cliente::getClienteById($id);
+
+                if($requestContent['direccion']) {
+                    $cliente->direccion = $requestContent['direccion'];
+                }
+
+                if($requestContent['nombre']){
+                    $cliente->nombre = $requestContent['nombre'];
+                }
+
+                if($requestContent['apellidos']){
+                    $cliente->apellidos = $requestContent['apellidos'];
+                }
+
+                if($requestContent['telefono']){
+                    $cliente->telefono = $requestContent['telefono'];
+                }
+
+                if($requestContent['correo_electronico']) {
+                    $cliente->correo_electronico = $requestContent['correo_electronico'];
+                }
+
+                $cliente->updateCliente();
+
+                $resultResponse->setData($cliente);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function patch(Request $request, string $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();   
 
@@ -273,7 +333,7 @@ class ClienteController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

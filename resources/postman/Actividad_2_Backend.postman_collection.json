@@ -130,7 +130,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"apellidos\": \"Update Cliente\"\r\n}",
+									"raw": "{\r\n    \"dni\": \"58236478A\",\r\n    \"correo_electronico\": \"prueba@prueba.es\",\r\n    \"nombre\": \"Prueba\",\r\n    \"apellidos\": \"Update Cliente PUT\",\r\n    \"telefono\": \"600000000\",\r\n    \"direccion\": \"Calle Falsa\",\r\n    \"contrasenya\": \"pass\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -138,7 +138,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/clientes/24451780C",
+									"raw": "http://localhost/api/clientes/58236478A",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -146,7 +146,36 @@
 									"path": [
 										"api",
 										"clientes",
-										"24451780C"
+										"58236478A"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica cliente PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"apellidos\": \"Update Cliente PATCH\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/58236478A",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"58236478A"
 									]
 								}
 							},
@@ -254,7 +283,65 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"apellidos\": \"Update Cliente\"\r\n}",
+									"raw": "{\r\n    \"dni\": \"24451780C\",\r\n    \"correo_electronico\": \"prueba@prueba.es\",\r\n    \"nombre\": \"Prueba\",\r\n    \"apellidos\": \"update Cliente PUT\",\r\n    \"telefono\": \"600000000\",\r\n    \"direccion\": \"Calle Falsa\",\r\n    \"contrasenya\": \"pass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/24451780X",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"24451780X"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica cliente objeto incompleto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"apellidos\": \"Update Cliente PUT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/58236478A",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"58236478A"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no cliente PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"apellidos\": \"Update Cliente PATCH\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -331,7 +418,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost/api/mascotas/7755689",
+									"raw": "http://localhost/api/mascotas/6987354",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -339,7 +426,7 @@
 									"path": [
 										"api",
 										"mascotas",
-										"7755689"
+										"6987354"
 									]
 								}
 							},
@@ -402,7 +489,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"num_chip\": 7755689,\r\n    \"nombre_mascota\": \"Aru\",\r\n    \"edad\": 3,\r\n    \"sexo\": \"H\",\r\n    \"especie\": \"gato\",\r\n    \"vacunas\": \"Rabia, trivalente y leucemia\",\r\n    \"informes_de_mascota\": \"[\\\"resultado.doc\\\", \\\"resultado2.doc\\\"]\",\r\n    \"historial_clinico\": \"NUEVO HISTORIAL\",\r\n    \"dni\": \"98745632C\"\r\n}",
+									"raw": "{\r\n        \"num_chip\": 6987354,\r\n        \"nombre_mascota\": \"Prueba update PUT\",\r\n        \"edad\": 6,\r\n        \"sexo\": \"H\",\r\n        \"especie\": \"perro\",\r\n        \"vacunas\": \"Rabia y polivalente\",\r\n        \"informes_de_mascota\": [\r\n            \"informe.doc\"\r\n        ],\r\n        \"historial_clinico\": \"castrado\",\r\n        \"dni\": \"44556677G\",\r\n        \"created_at\": null,\r\n        \"updated_at\": \"2023-07-28T09:59:24.000000Z\",\r\n        \"deleted_at\": null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -410,7 +497,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost/api/mascotas/7755689",
+									"raw": "http://localhost/api/mascotas/6987354",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -418,7 +505,36 @@
 									"path": [
 										"api",
 										"mascotas",
-										"7755689"
+										"6987354"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica mascota PATCH",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre_mascota\": \"Prueba update PATCH\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/6987354",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"6987354"
 									]
 								}
 							},
@@ -523,6 +639,64 @@
 							"name": "Modifica no mascota",
 							"request": {
 								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"num_chip\": 6987354,\r\n        \"nombre_mascota\": \"Prueba update PUT\",\r\n        \"edad\": 6,\r\n        \"sexo\": \"H\",\r\n        \"especie\": \"perro\",\r\n        \"vacunas\": \"Rabia y polivalente\",\r\n        \"informes_de_mascota\": [\r\n            \"informe.doc\"\r\n        ],\r\n        \"historial_clinico\": \"castrado\",\r\n        \"dni\": \"44556677G\",\r\n        \"created_at\": null,\r\n        \"updated_at\": \"2023-07-28T09:59:24.000000Z\",\r\n        \"deleted_at\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/1122335",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"1122335"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no mascota Copy",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"nombre\":\"FALLO PUT falta elementos\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/6987354",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"6987354"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica no mascota Copy",
+							"request": {
+								"method": "PATCH",
 								"header": [],
 								"body": {
 									"mode": "raw",
