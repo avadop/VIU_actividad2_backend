@@ -13,6 +13,39 @@
 					"name": "OKs",
 					"item": [
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"pablo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Clientes",
 							"request": {
 								"method": "GET",
@@ -207,6 +240,39 @@
 					"name": "KOs",
 					"item": [
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"pabasdasdlo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "No cliente",
 							"request": {
 								"method": "GET",
@@ -394,6 +460,39 @@
 					"name": "Oks",
 					"item": [
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"MAU\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Mascotas",
 							"request": {
 								"method": "GET",
@@ -565,6 +664,39 @@
 				{
 					"name": "KOs",
 					"item": [
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"MAasdasdU\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/mascotas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"mascotas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "No mascota",
 							"request": {
@@ -752,6 +884,39 @@
 				{
 					"name": "OKs",
 					"item": [
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"prese\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/citas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"citas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Citas",
 							"request": {
@@ -967,6 +1132,39 @@
 					"name": "KOs",
 					"item": [
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"lalala\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clientes/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clientes",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "No cita",
 							"request": {
 								"method": "GET",
@@ -1133,6 +1331,39 @@
 					"name": "OKs",
 					"item": [
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"123589746\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Clinicas",
 							"request": {
 								"method": "GET",
@@ -1283,6 +1514,39 @@
 				{
 					"name": "KOs",
 					"item": [
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"0s0s0s0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/clinicas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"clinicas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "No clinica",
 							"request": {
@@ -1449,6 +1713,39 @@
 				{
 					"name": "OKs",
 					"item": [
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"VACUNAS\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Recordatorios",
 							"request": {
@@ -1643,6 +1940,39 @@
 					"name": "KOs",
 					"item": [
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"sasdsds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/recordatorios/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"recordatorios",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "No recordatorio",
 							"request": {
 								"method": "GET",
@@ -1808,6 +2138,39 @@
 				{
 					"name": "OKs",
 					"item": [
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"Comida\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Productos",
 							"request": {
@@ -1981,6 +2344,39 @@
 					"name": "KOs",
 					"item": [
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"asdasd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/productos/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"productos",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "No producto",
 							"request": {
 								"method": "GET",
@@ -2146,6 +2542,39 @@
 				{
 					"name": "OKs",
 					"item": [
+						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"2023-05-11\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Compras",
 							"request": {
@@ -2324,6 +2753,39 @@
 					"name": "KOs",
 					"item": [
 						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"20asdasd7\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/compras/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"compras",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Compras no cliente",
 							"request": {
 								"method": "GET",
@@ -2496,6 +2958,39 @@
 					"name": "OKs",
 					"item": [
 						{
+							"name": "Busqueda avanzada",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"bajo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Alertas",
 							"request": {
 								"method": "GET",
@@ -2646,6 +3141,39 @@
 				{
 					"name": "KOs",
 					"item": [
+						{
+							"name": "Busqueda avanzada KO",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search_term\": \"asdasd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/alertas/advance/search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"alertas",
+										"advance",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "No alerta",
 							"request": {
