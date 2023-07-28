@@ -56,6 +56,7 @@ Route::controller(CitaController::class)->prefix('citas')->group(function () {
     Route::get('/advance/search', 'search'); 
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
     Route::get('/mascota/{num_chip}', 'getCitasMascota');
     Route::get('/clinica/{id_clinica}', 'getCitasClinica');
@@ -70,6 +71,7 @@ Route::controller(ClinicaController::class)->prefix('clinicas')->group(function 
     Route::get('/advance/search', 'search'); 
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
 }); 
 
@@ -79,6 +81,7 @@ Route::controller(RecordatorioController::class)->prefix('recordatorios')->group
     Route::get('/{id}', 'getById');
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
     Route::get('/mascota/{num_chip}', 'getRecordatoriosMascota');
     Route::get('/clinica/{id_clinica}', 'getRecordatoriosClinica');
@@ -91,6 +94,7 @@ Route::controller(ProductoController::class)->prefix('productos')->group(functio
     Route::get('/{id}', 'getById');
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
     Route::get('/nombre_producto/{nombre_}', 'getProductosNombre');
     Route::get('/advance/search', 'search'); 
@@ -104,6 +108,7 @@ Route::controller(CompraController::class)->prefix('compras')->group(function ()
     Route::get('/{id_producto}/{dni}', 'getById');
     Route::post('/new', 'create');
     Route::put('/{id_producto}/{dni}', 'update');
+    Route::patch('/{id_producto}/{dni}', 'patch');
     Route::delete('/{id_producto}/{dni}', 'delete');
     Route::get('/cliente/dni/{dni}', 'getComprasDNI');
    
@@ -115,6 +120,7 @@ Route::controller(AlertaController::class)->prefix('alertas')->group(function ()
     Route::get('/{id}', 'getById');
     Route::post('/new', 'create');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'patch');
     Route::delete('/{id}', 'delete');
     Route::get('/id_producto/{id_producto}', 'getAlertasProducto');
     Route::get('/advance/search', 'search'); 

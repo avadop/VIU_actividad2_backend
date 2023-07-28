@@ -67,8 +67,9 @@ class RecordatorioController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
-        $this->validateRecordatorio($request, $requestContent);
         try {
+            $this->validateRecordatorio($request, $requestContent);
+            
             $newRecordatorio = new Recordatorio([
                 'fecha_inicio' => $requestContent['fecha_inicio'],
                 'periodicidad' => $requestContent['periodicidad'],
@@ -105,7 +106,70 @@ class RecordatorioController extends Controller
     public function update(Request $request, $id)
     {
         $requestContent = json_decode($request->getContent(), true);
-        $this->validateRecordatorio($request, $requestContent);
+
+        $resultResponse =  new ResultResponse();       
+
+        try {
+            $this->validateRecordatorio($request, $requestContent);
+
+            try{
+                $recordatorio = Recordatorio::getRecordatorioById($id);
+
+                if($requestContent['fecha_inicio']) {
+                    $recordatorio->fecha_inicio = $requestContent['fecha_inicio'];
+                }
+
+                if($requestContent['periodicidad']){
+                    $recordatorio->periodicidad = $requestContent['periodicidad'];
+                }
+
+                if($requestContent['motivo']) {
+                    $recordatorio->motivo = $requestContent['motivo'];
+                }
+
+                if($requestContent['metodo_envio']) {
+                    $recordatorio->metodo_envio = $requestContent['metodo_envio'];
+                }
+
+                if($requestContent['num_chip']) {
+                    $recordatorio->num_chip = $requestContent['num_chip'];
+                }
+
+                if($requestContent['id_clinica']) {
+                    $recordatorio->id_clinica = $requestContent['id_clinica'];
+                }
+
+                $recordatorio->updateRecordatorio();
+
+                $resultResponse->setData($recordatorio);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Recordatorio  $recordatorio
+     * @return \Illuminate\Http\Response
+     */
+    public function patch(Request $request, $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();       
 
@@ -265,7 +329,7 @@ class RecordatorioController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

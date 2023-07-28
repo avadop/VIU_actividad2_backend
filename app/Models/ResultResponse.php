@@ -11,6 +11,7 @@ class ResultResponse
     const TXT_SUCCESS_CODE = 'Success';
     const TXT_ERROR_CODE = 'Error';
     const TXT_ERROR_ELEMENT_NOT_FOUND_CODE = 'Element not found';
+    const TXT_ERROR_MISSING_DATA = 'Data missing in object';
 
     public $statusCode;
     public $message;

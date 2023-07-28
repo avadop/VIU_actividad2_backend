@@ -66,8 +66,9 @@ class CitaController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
-        $this->validateCita($request, $requestContent);
         try {
+            $this->validateCita($request, $requestContent);
+
             $newCita = new Cita([
                 'hora' => $requestContent['hora'],
                 'fecha' => $requestContent['fecha'],
@@ -105,7 +106,70 @@ class CitaController extends Controller
     {
         $requestContent = json_decode($request->getContent(), true);
 
-        $this->validateCita($request, $requestContent);
+        $resultResponse =  new ResultResponse();    
+        
+        try {
+            $this->validateCita($request, $requestContent);
+
+            try {
+                $cita = Cita::getCitaById($id);
+                if($requestContent['hora']) {
+                    $cita->hora = $requestContent['hora'];
+                }
+
+                if($requestContent['fecha']) {
+                    $cita->fecha = $requestContent['fecha'];
+                }
+
+                if($requestContent['modalidad_cita']) {
+                    $cita->modalidad_cita = $requestContent['modalidad_cita'];
+                }
+
+                if($requestContent['tipo_cita']) {
+                    $cita->tipo_cita = $requestContent['tipo_cita'];
+                }
+
+                if($requestContent['num_chip']) {
+                    $cita->num_chip = $requestContent['num_chip'];
+                }
+
+                if($requestContent['id_clinica']) {
+                    $cita->id_clinica = $requestContent['id_clinica'];
+                }
+
+                $cita->updateCita();
+
+                $resultResponse->setData($cita);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+            }
+            catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * No es necesario enviar todo el objeto
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Cita  $cita
+     * @return \Illuminate\Http\Response
+     */
+    public function patch(Request $request, $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();       
 
@@ -284,7 +348,7 @@ class CitaController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

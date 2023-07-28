@@ -13,7 +13,8 @@ class ClinicasTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('clinicas')->insert([
-            ['id_clinica' => 123589746]
+            ['id_clinica' => 123589746],
+            ['id_clinica' => 904562929]
         ]);
     }
 }

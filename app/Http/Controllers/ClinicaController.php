@@ -66,9 +66,9 @@ class ClinicaController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
-        $this->validateClinica($request, $requestContent);
-
         try {
+            $this->validateClinica($request, $requestContent);
+
             $newClinica = new Clinica([
                 'id_clinica' => $requestContent['id_clinica'],
                 'nombre' => $requestContent['nombre']
@@ -102,12 +102,56 @@ class ClinicaController extends Controller
     {
         $requestContent = json_decode($request->getContent(), true);
 
-        $this->validateClinica($request, $requestContent);
+        $resultResponse =  new ResultResponse();       
+
+        try {
+            $this->validateClinica($request, $requestContent);
+
+            try {
+                $clinica = Clinica::getClinicaById($id);
+                if($requestContent['id_clinica']) {
+                    $clinica->id_clinica = $requestContent['id_clinica'];
+                }
+
+                if($requestContent['nombre']) {
+                    $clinica->nombre = $requestContent['nombre'];
+                }
+
+                $clinica->updateClinica();
+
+                $resultResponse->setData($clinica);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Clinica  $clinica
+     * @return \Illuminate\Http\Response
+     */
+    public function patch(Request $request, $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();       
 
         try {
-
             $clinica = Clinica::getClinicaById($id);
             if(isset($requestContent['id_clinica'])) {
                 $clinica->id_clinica = $requestContent['id_clinica'];
@@ -201,7 +245,7 @@ class ClinicaController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

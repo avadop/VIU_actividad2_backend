@@ -67,9 +67,9 @@ class CompraController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
-        $this->validateCompra($request, $requestContent);
-
         try {
+            $this->validateCompra($request, $requestContent);
+
             $newCompra = new Compra([
                 'fecha_compra' => $requestContent['fecha_compra'],
                 'id_producto' => $requestContent['id_producto'],
@@ -106,7 +106,52 @@ class CompraController extends Controller
     public function update(Request $request, $id_producto, $dni)
     {
         $requestContent = json_decode($request->getContent(), true);
-        $this->validateCompra($request, $requestContent);
+
+        $resultResponse =  new ResultResponse();
+
+        try {
+            $this->validateCompra($request, $requestContent);
+
+            try {
+                $compra = Compra::getCompraById($id_producto, $dni);
+
+                if($requestContent['id_producto']) {
+                    $compra->id_producto = $requestContent['id_producto'];
+                }
+
+                if($requestContent['dni']) {
+                    $compra->dni = $requestContent['dni'];
+                }
+
+                if($requestContent['fecha_compra']) {
+                    $compra->fecha_compra = $requestContent['fecha_compra'];
+                }
+
+                $compra->updateCompra($id_producto, $dni, $requestContent);
+
+                $resultResponse->setData($compra);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function patch(Request $request, $id_producto, $dni)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();
 
@@ -241,7 +286,7 @@ class CompraController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

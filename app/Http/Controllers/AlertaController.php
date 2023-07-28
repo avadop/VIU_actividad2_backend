@@ -68,9 +68,9 @@ class AlertaController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
-        $this->validateAlerta($request, $requestContent);
-
         try {
+            $this->validateAlerta($request, $requestContent);
+
             $newAlerta = new Alerta([
                 'mensaje' => $requestContent['mensaje'],
                 'stock_restante' => $requestContent['stock_restante'],
@@ -107,7 +107,63 @@ class AlertaController extends Controller
     {
         $requestContent = json_decode($request->getContent(), true);
 
-        $this->validateAlerta($request, $requestContent);
+        $resultResponse =  new ResultResponse();       
+
+        try {
+            $this->validateAlerta($request, $requestContent);
+
+            try {
+
+                $alerta = Alerta::getAlertaById($id);
+                if($requestContent['mensaje']) {
+                    $alerta->mensaje = $requestContent['mensaje'];
+                }
+
+                if($requestContent['stock_restante']) {
+                    $alerta->stock_restante = $requestContent['stock_restante'];
+                }
+
+                if($requestContent['fecha_alerta']){
+                    $alerta->fecha_alerta = $requestContent['fecha_alerta'];
+                }
+
+                if($requestContent['id_producto']) {
+                    $alerta->id_producto = $requestContent['id_producto'];
+                }
+
+                $alerta->updateAlerta();
+
+                $resultResponse->setData($alerta);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Alerta  $alerta
+     * @return \Illuminate\Http\Response
+     */
+
+     public function patch(Request $request, $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();       
 
@@ -235,7 +291,7 @@ class AlertaController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }

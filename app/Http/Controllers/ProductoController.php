@@ -71,8 +71,9 @@ class ProductoController extends Controller
         $requestContent = json_decode($request->getContent(), true);
         $resultResponse =  new ResultResponse();  
 
-        $this->validateProducto($request, $requestContent);
         try {
+            $this->validateProducto($request, $requestContent);
+
             $newProducto = new Producto([
                 'nombre_producto' => $requestContent['nombre_producto'],
                 'marca' => $requestContent['marca'],
@@ -114,7 +115,71 @@ class ProductoController extends Controller
     {
         $requestContent = json_decode($request->getContent(), true);
 
-        $this->validateProducto($request, $requestContent);
+        $resultResponse =  new ResultResponse();    
+        
+        try {
+            $this->validateProducto($request, $requestContent);
+
+            try {
+
+                $producto = Producto::getProductoById($id);
+
+                if($requestContent['nombre_producto']) {
+                    $producto->nombre_producto = $requestContent['nombre_producto'];
+                }
+
+                if($requestContent['marca']) {
+                    $producto->marca = $requestContent['marca'];
+                }
+
+                if($requestContent['imagen']) {
+                    $producto->imagen = $requestContent['imagen'];
+                }
+
+                if($requestContent['descripcion']) {
+                    $producto->descripcion = $requestContent['descripcion'];
+                }
+
+                if($requestContent['ficha_tecnica']) {
+                    $producto->ficha_tecnica = $requestContent['ficha_tecnica'];
+                }
+
+                if($requestContent['precio']) {
+                    $producto->precio = $requestContent['precio'];
+                }
+
+                if($requestContent['cantidad_disponible']) {
+                    $producto->cantidad_disponible = $requestContent['cantidad_disponible'];
+                }
+
+                if($requestContent['tipo_producto']) {
+                    $producto->tipo_producto = $requestContent['tipo_producto'];
+                }
+
+                $producto->updateProducto();
+
+                $resultResponse->setData($producto);
+                $resultResponse->setStatusCode(ResultResponse::SUCCESS_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_SUCCESS_CODE);
+
+            } catch(\Exception $e){
+                $resultResponse->setData($e->getMessage());
+                $resultResponse->setStatusCode(ResultResponse::ERROR_ELEMENT_NOT_FOUND_CODE);
+                $resultResponse->setMessage(ResultResponse::TXT_ERROR_ELEMENT_NOT_FOUND_CODE);
+            }
+        } catch(\Exception $e){
+            $resultResponse->setData($e->getMessage());
+            $resultResponse->setStatusCode(ResultResponse::ERROR_CODE);
+            $resultResponse->setMessage(ResultResponse::TXT_ERROR_MISSING_DATA);
+        }
+
+        $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
+        return response($json)->header('Content-Type', 'application/json');
+    }
+
+    public function patch(Request $request, $id)
+    {
+        $requestContent = json_decode($request->getContent(), true);
 
         $resultResponse =  new ResultResponse();       
 
@@ -169,6 +234,7 @@ class ProductoController extends Controller
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -196,6 +262,7 @@ class ProductoController extends Controller
         $json = json_encode($resultResponse, JSON_PRETTY_PRINT);    
         return response($json)->header('Content-Type', 'application/json');
     }
+
     public function getProductosNombre($name_) {
         $resultResponse =  new ResultResponse();
 
@@ -261,7 +328,7 @@ class ProductoController extends Controller
         ];
 
         foreach ($validationRules as $field => $validationRule) {
-            if (isset($content[$field])) {
+            if ($content[$field]) {
                 $rules[$field] = $validationRule;
             }
         }
